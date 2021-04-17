@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock title %}
+
+{% block body %}
+
+
+<div class="container">
+
+
+
+    <h1 class="my-3">Login</h1>
+    <form action="" method="POST">
+    {% csrf_token %}
+
+    {% for field in login_form %}
+        <p>
+            {{field.label_tag}}
+            {{field}}
+
+            {% if field.help_text %}
+                <small class="text-muted">{{field.help_text}}</small>
+            {% endif %}
+
+
+        </p>
+    {% endfor %}
+    {% for field in login_form %}
+            {% for error in field.errors %}
+                <p class="text-danger">{{error}}</p>
+            {% endfor %}
+    {% endfor %}
+            {% if login_form.non_field_errors %}
+                <div class="text-danger">
+                    <p>{{login_form.non_field_errors}}</p>
+                </div>
+            {% endif %}
+
+    <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+    don't have an account
+    <a href="{% url 'signup' %}">Create a new account</a>
+</div>
+
+{% endblock body %}
