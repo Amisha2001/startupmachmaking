@@ -89,7 +89,7 @@ def account(request):
                     new_resume = Resume(user=request.user, desc=bio, avatar=avatar, phn_no=ph_no, primary_city=primary_city, secondary_city=secondary_city)
                     new_resume.save()
                     print('saved')
-                    return redirect('account')
+                    return redirect('/dashboard/applicant')
     
         return render(request, 'user/account.html', context)
     return redirect('login')

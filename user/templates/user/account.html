@@ -35,10 +35,12 @@ Loaded dashboard
 {% endif %}
 {% else %}
 {% if resume %}
+
 loded dashboard for employee
+
 {% else %}
 
-<form action="{% url 'account' %}" method='POST'>
+<form action="{% url 'dashboard/applicant' %}" method='POST'>
   {% csrf_token %}
   <input type="hidden" name="name" value="res_form">
   <div class="form-floating mb-3">
