@@ -6,5 +6,5 @@ from . import views
 
 urlpatterns = [
     path('applicant', views.applicantdashboard, name="applicantdashboard"),
-    
+    path('joblist', views.joblist, name="joblist")
 ] 
