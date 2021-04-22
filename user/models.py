@@ -136,4 +136,11 @@ class Company(models.Model):
 
     def __str__(self):
         return self.company_name
+
+class Job_Opening(models.Model):
+    skill = models.CharField(max_length=256)
+    expirence = models.IntegerField()
+    location = models.CharField(max_length=256)
+    job_desc = models.CharField(max_length=2000)
+
     
