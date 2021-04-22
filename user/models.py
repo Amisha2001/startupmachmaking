@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db.models.deletion import CASCADE
 from django.db.models.enums import Choices
 # Create your models here.
+# from mongoengine import Document,fields
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, username, first_name, last_name, is_startup_founder, password=None):
@@ -138,9 +139,18 @@ class Company(models.Model):
         return self.company_name
 
 class Job_Opening(models.Model):
-    skill = models.CharField(max_length=256)
-    expirence = models.IntegerField()
-    location = models.CharField(max_length=256)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     job_desc = models.CharField(max_length=2000)
+    location = models.CharField(max_length=256)
+    expirence = models.IntegerField()
+    skill = models.CharField(max_length=256)
 
-    
+    # map={"job_desc":job_desc,"location":location,"expirence":expirence,"skill"} 
+
+    def __str__(self):
+        return self.job_desc + "," + self.location+ "," + (str)(self.expirence) + "," + self.skill
+
+#    map={"job_desc":job_desc,"location":location,"expirence":expirence,"skill":skill} 
+
+#     def __hash__(self):
+#         return self.map

@@ -8,10 +8,13 @@
 </head>
 <body>
     JOBS LIST
-    <p>{{data}}</p>
-    {% comment %} {% for row in data %}
-    {{row['company_desc']}}
-    {%endfor%} {% endcomment %}
+    <p>{{job_opening}}</p>
+    {% for row in job_opening %}
+    {{row}}
+    <br>
+    {%endfor%}
+
+
     {% comment %} {{user_job_opening.find({"skill":{{skill}}})}}. {% endcomment %}
 </body>
 </html>

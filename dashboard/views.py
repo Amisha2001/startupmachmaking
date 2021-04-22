@@ -7,8 +7,16 @@ def applicantdashboard(request):
     return render(request,'applicantdashboard.html')
 
 def joblist(request):
-    skill = request.POST.get('skill')
-    # data = Job_Opening.objects.find(user_job_opening.find({"skill":skill}))
-    data = Company.objects.get({'company_desc':'m'})
+    tag = request.POST.get('skill')
 
-    return render(request,'joblist.html',{"data": data})
+    job_opening = Job_Opening.objects.filter(skill=tag)
+    # data = job_opening.split(",")
+    data=job_opening.first()
+    # for i in job_opening:
+    #     data=i
+
+    data=(str)(data)
+    data = data.split(",")
+    print(data)
+    context = {'job_opening': data}
+    return render(request,'joblist.html',context)
