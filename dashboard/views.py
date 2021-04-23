@@ -8,7 +8,7 @@ def applicantdashboard(request):
 
 def joblist(request):
     tag = request.POST.get('skill')
-
+    
     job_opening = Job_Opening.objects.filter(skill=tag)
     # data = job_opening.split(",")
     # job_opening = Job_Opening.objects.all()
@@ -19,5 +19,9 @@ def joblist(request):
     # data=(str)(data)
     # data = data.split(",")
     # print(data)
+    founder = []
+    
+    for job in job_opening:
+        founder.append(list(Company.objects.filter(user_id=job.user_id).values('company_name')))
     context = {'job_opening': job_opening}
-    return render(request,'joblist.html',context)
+    return render(request,'joblist.html',{'job_opening': job_opening, 'founder': founder})
