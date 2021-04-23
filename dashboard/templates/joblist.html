@@ -9,9 +9,19 @@
 <body>
     JOBS LIST
     <p>{{job_opening}}</p>
-    {% for row in job_opening %}
-    {{row}}
+    {% comment %} <p>{{job_opening.job_desc}}</p> {% endcomment %}
     <br>
+    {% comment %} <p>{{job_opening.skill}}</p> {% endcomment %}
+    {% for row in job_opening %}
+        {{row.job_desc}}
+        {% comment %} <br> {% endcomment %}
+        {{row.skill}}
+        {% comment %} <br> {% endcomment %}
+        {{row.expirence}}
+        {% comment %} <br> {% endcomment %}
+        {{row.location}}
+        <br>
+        <br>
     {%endfor%}
 
 
