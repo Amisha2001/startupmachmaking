@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}{{job.title}} at {{job.company.company_name}}{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+
+<h1 class="text-center my-3">{{job.jobtype}} {{job.title}} at {{job.company.company_name}}</h1>
+
+<div class="card my-5">
+  <div class="card-body">
+    <h3>{{job.title}}</h3>
+    <h5 class="text-muted">{{job.company.company_name}}</h5>
+  <hr>
+  <p>{{job.jobtype}}</p>
+  <p>Salary: {{job.salary}}</p>
+  <p>Start Date: {{job.statdate}}</p>
+  <p>Apply By: {{job.applyby}}</p>
+  <hr>
+  <h6>{{job.company.company_name}}</h6>
+  <a href="{{job.company.company_website}}" target="_blank">Website</a>
+  <p>{{job.company.company_desc}}</p>
+  <hr>
+  <h5>About The Job</h5>
+  <pre>{{job.aboutjob}}</pre>
+  <hr>
+  <h5>Skills Required</h5>
+  <p>{{job.skills}}</p>
+  </div>
+  <div class="card-footer d-flex justify-content-center align-items-center">
+    <a href="#" class="btn btn-primary">Apply Now</a>
+  </div>
+</div>
+
+</div>
+
+
+
+{% endblock body %}
