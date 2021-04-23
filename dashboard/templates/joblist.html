@@ -8,21 +8,26 @@
 </head>
 <body>
     JOBS LIST
-    <p>{{job_opening}}</p>
+    {% comment %} <br>
+    {{request.user.username}}
+    <p>{{company_details}}<p>
+    <p>{{company_details.0.company_name}}<p>
+<br>
+    <p>{{job_details}}</p>
+    <br>
+    {{job_details.0.job_desc}} {% endcomment %}
     {% comment %} <p>{{job_opening.job_desc}}</p> {% endcomment %}
     <br>
     {% comment %} <p>{{job_opening.skill}}</p> {% endcomment %}
-    {% for row in job_opening %}
-        {{row.job_desc}}
-        {% comment %} <br> {% endcomment %}
-        {{row.skill}}
-        {% comment %} <br> {% endcomment %}
-        {{row.expirence}}
-        {% comment %} <br> {% endcomment %}
-        {{row.location}}
+    {% for i in job_details %}
+        <p>{{company_details.0.company_name}}<p>
+        {{job_details.i.job_desc}}
+        {{job_details.i.skill}}
+        {{job_details.i.expirence}}
+        {{job_details.i.location}}
         <br>
         <br>
-    {%endfor%}
+    {%endfor%} 
 
 
     {% comment %} {{user_job_opening.find({"skill":{{skill}}})}}. {% endcomment %}
