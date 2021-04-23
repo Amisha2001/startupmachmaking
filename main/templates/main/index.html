@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block body %}
+<div class="container">
+
+{% for jobposting in jobpostings %}
+
+<div class="card my-5">
+  <div class="card-header">
+    {{jobposting.title}}<br>
+    {{jobposting.company}}
+  </div>
+  <div class="card-body">
+    <p class="card-text">Start Date: {{jobposting.statdate}}</p>
+    <p class="card-text">Apply By: {{jobposting.applyby}}</p>
+    <p class="card-text">Salary: {{jobposting.salary}}</p>
+  </div>
+  <div class="card-footer">
+    <p class="card-text">{{jobposting.jobtype}}</p>
+    <a href="job/{{jobposting.slug}}" class="btn btn-primary">view details</a>
+  </div>
+</div>
+
+{% endfor %}
+
+<a href="job/" class="my-3 btn btn-primary">View All</a>
+
+</div>
+
+{% endblock body %}

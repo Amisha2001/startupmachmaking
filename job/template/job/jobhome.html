@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block body %}
+<div class="container">
+
+{% for jobposting in jobpostings %}
+
+<div class="card my-5">
+  <div class="card-header">
+    {{jobposting.title}}<br>
+    {{jobposting.company}}
+  </div>
+  <div class="card-body">
+    <p class="card-text">Start Date: {{jobposting.statdate}}</p>
+    <p class="card-text">Apply By: {{jobposting.applyby}}</p>
+    <p class="card-text">Salary: {{jobposting.salary}}</p>
+  </div>
+  <div class="card-footer">
+    <p class="card-text">{{jobposting.jobtype}}</p>
+    <a href="{{jobposting.slug}}" class="btn btn-primary">view details</a>
+  </div>
+</div>
+
+{% endfor %}
+
+<div class="my-5">
+    {% if jobpostings.has_previous %}
+    <a class="btn btn-primary" href="?page={{jobpostings.number|add:" -1"}}">Previous</a>
+    {% else %}
+    <a class="btn btn-primary disabled" href="/">Previous</a>
+    {% endif %}
+
+    {% if jobpostings.has_next %}
+    <a class="btn btn-primary float-end" href="?page={{jobpostings.number|add:" 1"}}">Next</a>
+    {% else %}
+    <a class="btn btn-primary float-end disabled" href="/">Next</a>
+    {% endif %}
+  </div>
+
+</div>
+
+{% endblock body %}

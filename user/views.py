@@ -82,14 +82,23 @@ def account(request):
                 elif name=='res_form':
                     print('entered')
                     bio = request.POST['bio']
-                    avatar = request.POST['avatar']
+                    avatar = request.FILES['avatar']
                     ph_no = request.POST['ph_no']
                     primary_city = request.POST['pri_city']
                     secondary_city = request.POST['sec_city']
+                    if Resume.objects.get(user=request.user):
+                        updt_resume = Resume.objects.get(user=request.user)
+                        updt_resume.desc = bio
+                        updt_resume.avatar = avatar
+                        updt_resume.phn_no = ph_no
+                        updt_resume.primary_city = primary_city
+                        updt_resume.secondary_city = secondary_city
+                        updt_resume.save()
+                        return redirect('account')
                     new_resume = Resume(user=request.user, desc=bio, avatar=avatar, phn_no=ph_no, primary_city=primary_city, secondary_city=secondary_city)
                     new_resume.save()
                     print('saved')
-                    return redirect('/dashboard/applicant')
+                    return redirect('account')
     
         return render(request, 'user/account.html', context)
     return redirect('login')
