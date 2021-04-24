@@ -10,14 +10,6 @@ def joblist(request):
     tag = request.POST.get('skill')
 
     job_opening = Job_Opening.objects.filter(skill=tag)
-    # data = job_opening.split(",")
-    # job_opening = Job_Opening.objects.all()
-    # data=job_opening.first()
-    # for i in job_opening:
-    #     data=i
-
-    # data=(str)(data)
-    # data = data.split(",")
-    # print(data)
+    
     context = {'job_opening': job_opening}
     return render(request,'joblist.html',context)
