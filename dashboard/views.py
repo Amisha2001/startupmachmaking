@@ -22,6 +22,6 @@ def joblist(request):
     founder = []
     
     for job in job_opening:
-        founder.append(list(Company.objects.filter(user_id=job.user_id).values('company_name')))
-    context = {'job_opening': job_opening}
+        founder.append(job.company.company_name)
+    #context = {'job_opening': job_opening}
     return render(request,'joblist.html',{'job_opening': job_opening, 'founder': founder})
