@@ -28,16 +28,19 @@ def account(request):
                     comp_website = request.POST['comp_website']
                     new_company = Company(user=request.user, company_name=comp_name, company_desc=comp_desc, company_logo=comp_logo, company_website=comp_website)
                     new_company.save()
-                    return redirect('account')
+                    company_id=new_company.id
+                    print(company_id , "JSJDOASDFHASKDFJV")
+                    return render(request, 'user/founder_dashboard.html', {'company_id':company_id})
                 elif name=="founder_job_opening":
-
+                    company_id=request.POST['company_id']
                     job_desc = request.POST['job_desc']
                     location = request.POST['location']
                     expirence = request.POST['expirence']
                     skill = request.POST['skill']
-                    job_opening = Job_Opening(company=request.company,job_desc=job_desc, location=location, expirence=expirence, skill=skill)
+                    print(company_id)
+                    job_opening = Job_Opening(company=Company.objects.get(pk=company_id) ,job_desc=job_desc, location=location, expirence=expirence, skill=skill)
                     job_opening.save()
-                    return redirect('account')
+                    return render(request, 'user/founder_dashboard.html', {'company_id':company_id})
             try:
                 company = Company.objects.get(user=request.user)
                 context = {'company':company}

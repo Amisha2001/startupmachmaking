@@ -12,58 +12,6 @@
   Loaded dashboard
   {% comment %} <button action="{% url 'account' %}" method='POST' value="founder_job_opening"> Make new job <button>  {% endcomment %}
 
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#JobModal">
-    Make Job
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="JobModal" tabindex="-1" aria-labelledby="JobModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="JobModalLabel">Add Job</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="{% url 'account' %}" method='POST'>
-          {% csrf_token %}
-          <input type="hidden" name="name" value="founder_job_opening">
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="job_desc" id="floatingInput" placeholder="Job Description" required>
-            <label for="floatingInput">Job Description</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="location" id="floatingInput" placeholder="Location" required>
-            <label for="floatingInput">Location</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="expirence" id="floatingInput" placeholder="Experience" required>
-            <label for="floatingInput">Experience</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="skill" id="floatingInput" placeholder="Skill" required>
-            <label for="floatingInput">Skill</label>
-          </div>
-
-          {% comment %} <div>
-          <label for="floatingInputdate">Apply By</label>
-          <input type="date" class="form-control" name="start_year" id="floatingInputdate" placeholder="Stream" required>
-          </div> {% endcomment %}
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button class="btn btn-primary" type="submit">Save</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-
-
 
 {% else %}
 <h1 class="my-5">Company Details Form</h1>
