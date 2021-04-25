@@ -45,13 +45,11 @@
     <br>
     <br>
     {% comment %} <p>{{job_opening.skill}}</p> {% endcomment %}
-    {% for name in founder %}
-    {{name}}<br>
-    {% endfor %}
+   
     {% for row in job_opening %}
     <div class="card">
       <div class="container">
-      <h2>name</h2>
+      <h2>{{row.company.company_name}}</h2>
         <p id='des'><b>Job Description:</b> {{row.job_desc}}</p>
         {% comment %} <br> {% endcomment %}
         <p id='des'><b>Skill:</b> {{row.skill}}</p>

@@ -29,7 +29,7 @@ def account(request):
                     new_company = Company(user=request.user, company_name=comp_name, company_desc=comp_desc, company_logo=comp_logo, company_website=comp_website)
                     new_company.save()
                     company_id=new_company.id
-                    print(company_id , "JSJDOASDFHASKDFJV")
+                    #print(company_id , "JSJDOASDFHASKDFJV")
                     return render(request, 'user/founder_dashboard.html', {'company_id':company_id})
                 elif name=="founder_job_opening":
                     company_id=request.POST['company_id']
