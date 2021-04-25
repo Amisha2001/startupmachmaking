@@ -36,6 +36,7 @@ def account(request):
         else:
             if request.POST:
                 name = request.POST.get('name')
+                print('NAME',name)
                 if name == 'edu_form':
                     college = request.POST['college']
                     stream = request.POST['stream']
