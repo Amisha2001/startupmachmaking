@@ -2,7 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import SignupForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
-from .models import User, Portfolio, Resume, Skill, Job, Education, Accomplishments, Company
+from .models import *
 
 
 # Create your views here.
@@ -20,14 +20,24 @@ def account(request):
             context = {}
         if request.user.is_startup_founder:
             if request.POST:
-                comp_name = request.POST['comp_name']
-                comp_desc = request.POST['comp_desc']
-                comp_logo = request.POST['comp_logo']
-                comp_website = request.POST['comp_website']
-                new_company = Company(user=request.user, company_name=comp_name, company_desc=comp_desc, company_logo=comp_logo, company_website=comp_website)
-                new_company.save()
-                return redirect('account')
-            
+                name = request.POST.get('name')
+                if name=="company_detail":
+                    comp_name = request.POST['comp_name']
+                    comp_desc = request.POST['comp_desc']
+                    comp_logo = request.POST['comp_logo']
+                    comp_website = request.POST['comp_website']
+                    new_company = Company(user=request.user, company_name=comp_name, company_desc=comp_desc, company_logo=comp_logo, company_website=comp_website)
+                    new_company.save()
+                    return redirect('account')
+                elif name=="founder_job_opening":
+
+                    job_desc = request.POST['job_desc']
+                    location = request.POST['location']
+                    expirence = request.POST['expirence']
+                    skill = request.POST['skill']
+                    job_opening = Job_Opening(company=request.company,job_desc=job_desc, location=location, expirence=expirence, skill=skill)
+                    job_opening.save()
+                    return redirect('account')
             try:
                 company = Company.objects.get(user=request.user)
                 context = {'company':company}
@@ -36,6 +46,7 @@ def account(request):
         else:
             if request.POST:
                 name = request.POST.get('name')
+                print('NAME',name)
                 if name == 'edu_form':
                     college = request.POST['college']
                     stream = request.POST['stream']

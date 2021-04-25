@@ -139,7 +139,8 @@ class Company(models.Model):
         return self.company_name
 
 class Job_Opening(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    comp_name = models.CharField(max_length=256)
     job_desc = models.CharField(max_length=2000)
     location = models.CharField(max_length=256)
     expirence = models.IntegerField()
