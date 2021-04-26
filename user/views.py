@@ -42,7 +42,7 @@ def account(request):
                     job_opening.save()
                     #arpit(44)
                     jobs_opened=Job_Opening.objects.filter(company=company_id)
-                    return render(request, 'user/founder_dashboard.html', {'job_opened':jobs_opened})
+                    return render(request, 'user/founder_dashboard.html', {'job_opened':jobs_opened, 'company_id':company_id})
             try:
 
                 company = Company.objects.get(user=request.user)
