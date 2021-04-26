@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-    .card {
+{% extends 'base.html' %} 
+
+{% block title %}Account{% endblock title %} 
+
+<style>
+.card {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
@@ -33,12 +30,11 @@
   width: 100%;
   font-size: 18px;
 }
-    
-    
-    
     </style>
-</head>
-<body>
+
+    {% block body %}
+    
+
     <h1>Dear Applicant You are eligible for the following jobs</h1>
     {% comment %} <p>{{job_opening}}</p> {% endcomment %}
     {% comment %} <p>{{job_opening.job_desc}}</p> {% endcomment %}
@@ -67,5 +63,6 @@
 
 
     {% comment %} {{user_job_opening.find({"skill":{{skill}}})}}. {% endcomment %}
-</body>
-</html>
+
+
+{% endblock body %}

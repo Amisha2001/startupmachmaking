@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+ {% extends 'base.html' %} 
+
+{% block title %}Account{% endblock title %} 
+
+
 <style>
 .dropbtn {
   background-color: #4CAF50;
@@ -55,8 +56,8 @@
 
 .show {display: block;}
 </style>
-</head>
-<body>
+
+{% block body %}
 
 <h2>Search for a Start up based on your skill set</h2>
 
@@ -120,5 +121,5 @@ function filterFunction() {
 }
 </script> {% endcomment %}
 
-</body>
-</html>
+
+{% endblock body %}
