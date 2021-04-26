@@ -44,6 +44,7 @@ def account(request):
                     jobs_opened=Job_Opening.objects.filter(company=company_id)
                     return render(request, 'user/founder_dashboard.html', {'job_opened':jobs_opened})
             try:
+
                 company = Company.objects.get(user=request.user)
                 #arpit(49,50,51)
                 company_id=company.id
@@ -51,6 +52,7 @@ def account(request):
                 context = {'company':company,'job_opened':jobs_opened,'company_id':company_id}
             except:
                 context = {}
+                return render(request,'user/account.html',context)
         else:
             if request.POST:
                 name = request.POST.get('name')
