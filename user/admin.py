@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Portfolio, Resume, Skill, Job, Education, Accomplishments, Company
+from .models import User, Portfolio, Resume, Skill, Job, Education, Accomplishments, Company, Job_Opening
 from django.contrib.auth.admin import UserAdmin
 # Register your models here.
 class MyUserAdmin(UserAdmin):
@@ -19,3 +19,4 @@ admin.site.register(Job)
 admin.site.register(Education)
 admin.site.register(Accomplishments)
 admin.site.register(Company)
+admin.site.register(Job_Opening)
