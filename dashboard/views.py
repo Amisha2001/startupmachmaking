@@ -7,6 +7,7 @@ def applicantdashboard(request):
     return render(request,'applicantdashboard.html')
 
 def joblist(request):
+    job = joblist.objects.get()
     tag = request.POST.get('skill')
     
     job_opening = Job_Opening.objects.filter(skill=tag)

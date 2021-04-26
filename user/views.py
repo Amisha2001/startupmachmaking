@@ -112,8 +112,10 @@ def account(request):
                     print('saved')
                     return redirect('/dashboard/applicant')
                     #arpit(113,114,115)
+            elif Resume.objects.filter(user=request.user):
+                     return redirect('/dashboard/applicant')
             else:
-                return redirect('/dashboard/applicant')        
+                return render(request,'user/account.html')         
         return render(request, 'user/founder_dashboard.html', context)
     return redirect('login')
 
