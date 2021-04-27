@@ -2,8 +2,7 @@
 
 {% block title %}Account{% endblock title %} 
 
-<style>
-.card {
+<style>.card {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
@@ -29,8 +28,7 @@
   cursor: pointer;
   width: 100%;
   font-size: 18px;
-}
-    </style>
+}</style>
 
     {% block body %}
     
@@ -54,7 +52,10 @@
         {% comment %} <br> {% endcomment %}
         <p id='des'><b>Job Location:</b> {{row.location}}</p>
         </div>
-        <p><button>Apply</button></p>
+        {% comment %} <form action="jobdetails" method="GET">
+        {% csrf_token %} {% endcomment %}
+        <p><button type="submit">Apply</button></p>
+        {% comment %} </form> {% endcomment %}
     </div>
         
         <br>

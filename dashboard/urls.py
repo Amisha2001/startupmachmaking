@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
+
     path('applicant', views.applicantdashboard, name="applicantdashboard"),
-    path('joblist', views.joblist, name="joblist")
+    path('joblist', views.joblist, name="joblist"),
 ] 

@@ -1,10 +1,11 @@
- {% extends 'base.html' %} 
+{% extends 'base.html' %} 
 
 {% block title %}Account{% endblock title %} 
 
-
-<style>
-.dropbtn {
+"{% load static %}
+<link rel="stylesheet" href="{% static 'styles.css'%}">"
+{% comment %} <style> {% endcomment %}
+{% comment %} .dropbtn {
   background-color: #4CAF50;
   color: white;
   padding: 16px;
@@ -54,8 +55,8 @@
 
 .dropdown a:hover {background-color: #ddd;}
 
-.show {display: block;}
-</style>
+.show {display: block;} {% endcomment %}
+{% comment %} </style> {% endcomment %}
 
 {% block body %}
 

@@ -149,10 +149,15 @@ class Job_Opening(models.Model):
     # map={"job_desc":job_desc,"location":location,"expirence":expirence,"skill"} 
 
     def __str__(self):
-        return self.skill
+        return self.company.company_name + "-" + self.skill 
         # self.job_desc + "," + self.location+ "," + (str)(self.expirence) + "," + self.skill
 
 #    map={"job_desc":job_desc,"location":location,"expirence":expirence,"skill":skill} 
 
 #     def __hash__(self):
 #         return self.map
+
+class application(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job_Opening, on_delete=models.CASCADE)
+    

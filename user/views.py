@@ -162,3 +162,6 @@ def signup(request):
         form = SignupForm()
         context['signup_form'] = form
     return render(request, 'user/signup.html', context)
+
+def jobsapplied(request):
+    return render(request, "user/jobsapplied.html")
