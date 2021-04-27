@@ -8,4 +8,5 @@ urlpatterns = [
 
     path('applicant', views.applicantdashboard, name="applicantdashboard"),
     path('joblist', views.joblist, name="joblist"),
+    path('send_email', views.send_email, name="send_email"),
 ] 

@@ -110,7 +110,7 @@ def account(request):
                     new_resume = Resume(user=request.user, desc=bio, avatar=avatar, phn_no=ph_no, primary_city=primary_city, secondary_city=secondary_city)
                     new_resume.save()
                     print('saved')
-                    return redirect('/dashboard/applicant')
+                    return redirect('/dashboard/applicant')  #temporary
                     #arpit(113,114,115)
             elif Resume.objects.filter(user=request.user):
                      return redirect('/dashboard/applicant')
