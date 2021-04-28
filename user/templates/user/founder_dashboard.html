@@ -53,10 +53,10 @@
           <form action="{% url 'account' %}" method='POST'>
           {% csrf_token %}
           <input type="hidden" name="name" value="founder_job_opening">
-          <div class="form-floating mb-3">
+          {% comment %} <div class="form-floating mb-3">
             <input type="text" class="form-control" name="title" id="floatingInput" placeholder="Job Title" required>
             <label for="floatingInput">Job Title</label>
-          </div>
+          </div> {% endcomment %}
           <div class="form-floating mb-3">
             <input type="text" class="form-control" name="job_desc" id="floatingInput" placeholder="Job Description" required>
             <label for="floatingInput">Job Description</label>
@@ -69,29 +69,29 @@
             <input type="text" class="form-control" name="expirence" id="floatingInput" placeholder="Experience" required>
             <label for="floatingInput">Experience</label>
           </div>
-          <div class="form-floating mb-3">
+          {% comment %} <div class="form-floating mb-3">
             <input type="text" class="form-control" name="salary" id="floatingInput" placeholder="Salary" required>
             <label for="floatingInput">Salary</label>
-          </div>
-          <div class="form-floating mb-3">
+          </div> {% endcomment %}
+          {% comment %} <div class="form-floating mb-3">
             <input type="textarea" class="form-control" name="about_job" id="floatingInput" placeholder="About Job" required>
             <label for="floatingInput">About Job</label>
-          </div>
+          </div> {% endcomment %}
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="skill" id="floatingInput" placeholder="Skill" required>
-            <label for="floatingInput">Skill</label>
+            <input type="text" class="form-control" name="skill_req" id="floatingInput" placeholder="Skill" required>
+            <label for="floatingInput">Skills Required</label>
           </div>
           <div class="form-floating mb-3">
             <input type="hidden" class="form-control" name="company_id" id="floatingInput" value={{company_id}}>
             <label for="floatingInput"></label>
           </div>
-          <div>
+          {% comment %} <div>
             <label for="floatingInputdate">Start Date</label>
             <input type="date" class="form-control" name="start_year" id="floatingInputdate" placeholder="Stream" required>
             </div>
-           <div>
+           <div> {% endcomment %}
           <label for="floatingInputdate">Apply By</label>
-          <input type="date" class="form-control" name="end_year" id="floatingInputdate" placeholder="Stream" required>
+          <input type="date" class="form-control" name="deadline" id="floatingInputdate" placeholder="Stream" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -110,16 +110,16 @@
   
   <div class="card my-5">
     <div class="card-header">
-      {{jobposting.title}}<br>
+      yoyo<br> 
       {{jobposting.company}}
     </div>
     <div class="card-body">
-      <p class="card-text">Start Date: {{jobposting.statdate}}</p>
-      <p class="card-text">Apply By: {{jobposting.endate}}</p>
-      <p class="card-text">Salary: {{jobposting.salary}}</p>
+      {% comment %} <p class="card-text">Start Date: {{jobposting.statdate}}</p> {% endcomment %}
+      <p class="card-text">Apply By: {{jobposting.deadline}}</p>
+      {% comment %} <p class="card-text">Salary: {{jobposting.salary}}</p> {% endcomment %}
     </div>
     <div class="card-footer">
-      <p class="card-text">{{jobposting.jobtype}}</p>
+      <p class="card-text">jane do</p>
     </div>
   </div>
   {% endfor %}

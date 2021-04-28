@@ -140,23 +140,23 @@ class Company(models.Model):
         return self.company_name
 
 class Job_Opening(models.Model):
-    title = models.CharField(max_length=255)
+    job_type = models.CharField(max_length=255)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     jobdesc = models.TextField()
-    jobtype = models.CharField(max_length=255)
-    statdate = models.DateField()
-    endate = models.DateField()
+    # jobtype = models.CharField(max_length=255)
+    # startdate = models.DateField()
     experience = models.IntegerField()
-    salary = models.IntegerField()
-    aboutjob = models.TextField()
-    skills = models.CharField(max_length=255)
+    # salary = models.IntegerField()
+    # aboutjob = models.TextField()
+    skill_req = models.CharField(max_length=255)
+    deadline = models.DateField()  
     slug = models.CharField(max_length=1000, unique=True, null=True, blank=True)
 
     def __str__(self):
-        return self.title + " - " + self.company.company_name
+        return self.skill_req + " - " + self.job_type + " - " + self.company.company_name
 
     def save(self, *args, **kwargs):
-        slug = self.jobtype + " " + self.title + " at " + self.company.company_name
+        slug = self.skill_req + " - " + self.job_type + " - " + self.company.company_name
         slug = slugify(slug)
         self.slug = slug
         super(Job_Opening, self).save(*args, **kwargs)

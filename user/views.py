@@ -34,17 +34,19 @@ def account(request):
                     return render(request, 'user/founder_dashboard.html', {'company_id':company_id})
                 elif name=="founder_job_opening":
                     company_id=request.POST['company_id']
-                    job_title = request.POST['title']
-                    job_desc = request.POST['job_desc']
+                    # job_title = request.POST['title']
                     job_type = request.POST['job_type']
-                    start_year = datetime.strptime(request.POST['start_year'], "%Y-%m-%d")
-                    end_year = datetime.strptime(request.POST['end_year'], "%Y-%m-%d")
+                    jobdesc = request.POST['job_desc']
+                    # start_year = datetime.strptime(request.POST['start_year'], "%Y-%m-%d")
+                    # end_year = datetime.strptime(request.POST['end_year'], "%Y-%m-%d")
                     expirence = request.POST['expirence']
-                    salary = request.POST['salary']
-                    aboutjob = request.POST['about_job']
-                    skill = request.POST['skill']
+                    # salary = request.POST['salary']
+                    # aboutjob = request.POST['about_job']
+                    skill_req = request.POST['skill_req']
+                    deadline = datetime.strptime(request.POST['deadline'], "%Y-%m-%d")
+
                     print(company_id)
-                    job_opening = Job_Opening(company=Company.objects.get(pk=company_id) ,title = job_title,jobdesc=job_desc,jobtype= job_type,statdate= start_year,endate= end_year,experience=expirence,salary= salary,aboutjob=aboutjob,skills=skill)
+                    job_opening = Job_Opening(job_type= job_type,company=Company.objects.get(pk=company_id) ,jobdesc=job_desc,experience=expirence,skill_req=skill_req,deadline= deadline)
                     job_opening.save()
                     #arpit(44)
                     jobs_opened=Job_Opening.objects.filter(company=company_id)

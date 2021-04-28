@@ -11,16 +11,16 @@
 
 <div class="card my-5">
   <div class="card-header">
-    {{job.title}}<br>
+    {{job.job_type}}<br>
     {{job.company}}
   </div>
   <div class="card-body">
-    <p class="card-text">Start Date: {{job.statdate}}</p>
-    <p class="card-text">Apply By: {{job.endate}}</p>
-    <p class="card-text">Salary: {{job.salary}}</p>
+    {% comment %} <p class="card-text">Start Date: {{job.statdate}}</p> {% endcomment %}
+    <p class="card-text">Apply By: {{job.deadline}}</p>
+    {% comment %} <p class="card-text">Salary: {{job.salary}}</p> {% endcomment %}
   </div>
   <div class="card-footer">
-    <p class="card-text">{{job.jobtype}}</p>
+    {% comment %} <p class="card-text">{{job.job_type}}</p> {% endcomment %}
     <a href="{{job.slug}}" class="btn btn-primary">view details</a>
     
   </div>
