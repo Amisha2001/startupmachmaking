@@ -1,77 +1,32 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
-{% block title %}Account{% endblock title %} 
+{% block title %}
+    Home
+{% endblock title %}
 
-<style>.card {
-  /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width:50%
-}
-.container {
-  padding: 32px 56px;
-  
-}
-.card:hover {
-  box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
-}
-#des{
-  display:block
-}
-.card button {
-  border: none;
-  outline: 0;
-  padding: 12px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-}</style>
+{% block body %}
+<div class="container">
 
-    {% block body %}
+{% for job in job_opening %}
+
+<div class="card my-5">
+  <div class="card-header">
+    {{job.title}}<br>
+    {{job.company}}
+  </div>
+  <div class="card-body">
+    <p class="card-text">Start Date: {{job.statdate}}</p>
+    <p class="card-text">Apply By: {{job.endate}}</p>
+    <p class="card-text">Salary: {{job.salary}}</p>
+  </div>
+  <div class="card-footer">
+    <p class="card-text">{{job.jobtype}}</p>
+    <a href="{{jobposting.slug}}" class="btn btn-primary">view details</a>
     
+  </div>
+</div>
 
-    <h1>Dear Applicant You are eligible for the following jobs</h1>
-    {% comment %} <p>{{job_opening}}</p> {% endcomment %}
-    {% comment %} <p>{{job_opening.job_desc}}</p> {% endcomment %}
-    <br>
-    <br>
-    {% comment %} <p>{{job_opening.skill}}</p> {% endcomment %}
-   
-    {% for row in job_opening %}
-    <div class="card">
-      <div class="container">
-      <h2>{{row.company.company_name}}</h2>
-        <p id='des'><b>Job Description:</b> {{row.job_desc}}</p>
-        {% comment %} <br> {% endcomment %}
-        <p id='des'><b>Skill:</b> {{row.skill}}</p>
-        {% comment %} <br> {% endcomment %}
-        <p id='des'><b>Minimum Experience Required:</b> {{row.expirence}} Years</p>
-        {% comment %} <br> {% endcomment %}
-        <p id='des'><b>Job Location:</b> {{row.location}}</p>
-        </div>
-
-        <form action="send_email" method="POST">
-          {% csrf_token %}
-          <input type='hidden' name='company_name' value={{row.company.company_name}}>
-          <input type='hidden' name='job_desc' value={{row.job_desc}}>
-          <input type='hidden' name='skill' value={{row.skill}}>
-          <input type='hidden' name='expirence' value={{row.expirence}}>
-          <input type='hidden' name='location' value={{row.location}}>
-          </div>
-          <button>detial<button>
-          <button type="submit">Apply</button>
-        </form>
-    </div>
-        
-        <br>
-        <br><br><br>
-    {% endfor %}
-
-
-    {% comment %} {{user_job_opening.find({"skill":{{skill}}})}}. {% endcomment %}
+{% endfor %}
 
 
 {% endblock body %}

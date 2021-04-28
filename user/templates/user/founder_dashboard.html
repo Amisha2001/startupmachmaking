@@ -54,16 +54,28 @@
           {% csrf_token %}
           <input type="hidden" name="name" value="founder_job_opening">
           <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="title" id="floatingInput" placeholder="Job Title" required>
+            <label for="floatingInput">Job Title</label>
+          </div>
+          <div class="form-floating mb-3">
             <input type="text" class="form-control" name="job_desc" id="floatingInput" placeholder="Job Description" required>
             <label for="floatingInput">Job Description</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="location" id="floatingInput" placeholder="Location" required>
-            <label for="floatingInput">Location</label>
+            <input type="text" class="form-control" name="job_type" id="floatingInput" placeholder="Job Type" required>
+            <label for="floatingInput">Job Type</label>
           </div>
           <div class="form-floating mb-3">
             <input type="text" class="form-control" name="expirence" id="floatingInput" placeholder="Experience" required>
             <label for="floatingInput">Experience</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="salary" id="floatingInput" placeholder="Salary" required>
+            <label for="floatingInput">Salary</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="textarea" class="form-control" name="about_job" id="floatingInput" placeholder="About Job" required>
+            <label for="floatingInput">About Job</label>
           </div>
           <div class="form-floating mb-3">
             <input type="text" class="form-control" name="skill" id="floatingInput" placeholder="Skill" required>
@@ -73,11 +85,14 @@
             <input type="hidden" class="form-control" name="company_id" id="floatingInput" value={{company_id}}>
             <label for="floatingInput"></label>
           </div>
-          {% comment %} <div>
+          <div>
+            <label for="floatingInputdate">Start Date</label>
+            <input type="date" class="form-control" name="start_year" id="floatingInputdate" placeholder="Stream" required>
+            </div>
+           <div>
           <label for="floatingInputdate">Apply By</label>
-          <input type="date" class="form-control" name="start_year" id="floatingInputdate" placeholder="Stream" required>
-          </div> {% endcomment %}
-
+          <input type="date" class="form-control" name="end_year" id="floatingInputdate" placeholder="Stream" required>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -89,23 +104,24 @@
   </div>
   
 <h3>Jobs Which are already opened</h3>
-   {% for row in job_opened %}
-    <div class="card">
-      <div class="container">
-      {% comment %} <h2>{{row.company.company_name}}</h2> {% endcomment %}
-        <p id='des'><b>Job Description:</b> {{row.job_desc}}</p>
-        {% comment %} <br> {% endcomment %}
-        <p id='des'><b>Skill:</b> {{row.skill}}</p>
-        {% comment %} <br> {% endcomment %}
-        <p id='des'><b>Minimum Experience Required:</b> {{row.expirence}} Years</p>
-        {% comment %} <br> {% endcomment %}
-        <p id='des'><b>Job Location:</b> {{row.location}}</p>
-        </div>
-        {% comment %} <p><button>Apply</button></p> {% endcomment %}
-    </div>
-        
-        <br>
-        <br><br><br>
-    {% endfor %}
+<div class="container">
 
+  {% for jobposting in job_opened %}
+  
+  <div class="card my-5">
+    <div class="card-header">
+      {{jobposting.title}}<br>
+      {{jobposting.company}}
+    </div>
+    <div class="card-body">
+      <p class="card-text">Start Date: {{jobposting.statdate}}</p>
+      <p class="card-text">Apply By: {{jobposting.endate}}</p>
+      <p class="card-text">Salary: {{jobposting.salary}}</p>
+    </div>
+    <div class="card-footer">
+      <p class="card-text">{{jobposting.jobtype}}</p>
+    </div>
+  </div>
+  {% endfor %}
 {% endblock body %}
+

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db.models.deletion import CASCADE
 from django.db.models.enums import Choices
+from slugify import slugify
 # Create your models here.
 # from mongoengine import Document,fields
 
@@ -139,23 +140,26 @@ class Company(models.Model):
         return self.company_name
 
 class Job_Opening(models.Model):
+    title = models.CharField(max_length=255)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    # comp_name = models.CharField(max_length=256)
-    job_desc = models.CharField(max_length=2000)
-    location = models.CharField(max_length=256)
-    expirence = models.IntegerField()
-    skill = models.CharField(max_length=256)
-
-    # map={"job_desc":job_desc,"location":location,"expirence":expirence,"skill"} 
+    jobdesc = models.TextField()
+    jobtype = models.CharField(max_length=255)
+    statdate = models.DateField()
+    endate = models.DateField()
+    experience = models.IntegerField()
+    salary = models.IntegerField()
+    aboutjob = models.TextField()
+    skills = models.CharField(max_length=255)
+    slug = models.CharField(max_length=1000, unique=True, null=True, blank=True)
 
     def __str__(self):
-        return self.company.company_name + "-" + self.skill 
-        # self.job_desc + "," + self.location+ "," + (str)(self.expirence) + "," + self.skill
+        return self.title + " - " + self.company.company_name
 
-#    map={"job_desc":job_desc,"location":location,"expirence":expirence,"skill":skill} 
-
-#     def __hash__(self):
-#         return self.map
+    def save(self, *args, **kwargs):
+        slug = self.jobtype + " " + self.title + " at " + self.company.company_name
+        slug = slugify(slug)
+        self.slug = slug
+        super(Job_Opening, self).save(*args, **kwargs)
 
 class application(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
