@@ -63,9 +63,11 @@ def account(request):
                 company_id=company.id
                 jobs_opened=Job_Opening.objects.filter(company=company_id)
                 context = {'company':company,'job_opened':jobs_opened,'company_id':company_id}
+                return render(request, 'user/founder_dashboard.html', context)
             except:
                 context = {}
                 return render(request,'user/account.html',context)
+                
         else:
             if request.POST:
                 name = request.POST.get('name')
@@ -125,11 +127,11 @@ def account(request):
                     print('saved')
                     return redirect('account')  #temporary
                     #arpit(113,114,115)
-            elif Resume.objects.filter(user=request.user):
-                     return redirect('/dashboard/applicant')
-            else:
-                return render(request,'user/account.html')         
-        return render(request, 'user/founder_dashboard.html', context)
+                elif Resume.objects.filter(user=request.user) and  Accomplishments.objects.filter(user=request.user) and Skill.objects.filter(user=request.user) and Portfolio.objects.filter(user=request.user) and Job.objects.filter(user=request.user) and Education.objects.filter(user=request.user):
+                    return redirect('/dashboard/applicant')
+                else:
+                    return render(request,'user/account.html')         
+            return redirect('/dashboard/applicant')
     return redirect('login')
 
 def usrlogin(request):
@@ -178,9 +180,10 @@ def signup(request):
 
 
 def profile(request):
-   
+        
     try:
         resume = Resume.objects.get(user=request.user)
+        
         skill = Skill.objects.get(user=request.user)
         education = Education.objects.get(user=request.user)
         job = Job.objects.get(user=request.user)
@@ -188,7 +191,8 @@ def profile(request):
         accomplishments = Accomplishments.objects.get(user=request.user)
         context = {'resume': resume, 'skills': skill, 'educations': education, 'jobs': job, 'portfolios': portfolio, 'accomplishments': accomplishments}
         # print(context,"kkkkkkkkkkkkkkkkk")
+        
         return render(request, "user/profile.html", context)
     except:
-        return HttpResponse("aaaaa")
+        return HttpResponse("Something went wrong!!!")
 

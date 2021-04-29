@@ -38,11 +38,11 @@
 </form>
 {% endif %}
 {% else %}
-{% if resume %}
+{% comment %} {% if resume %}
 
 loded dashboard for employee
 
-{% else %}
+{% else %} {% endcomment %}
 
 <form action="{% url 'account' %}" method='POST'>
   {% csrf_token %}
@@ -295,8 +295,13 @@ loded dashboard for employee
       </div>
     </div>
   </div>
-  
-{% endif %}
+  <br><br>
+  <form action="{% url 'account' %}"  method='POST'>
+  {% csrf_token %}
+   <button class="btn btn-primary" type="submit">Click here to go to your Dashboard</button>
+
+  </form>
+{% comment %} {% endif %} {% endcomment %}
 
 {% endif %}
 
