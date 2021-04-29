@@ -21,19 +21,19 @@ def jobpost(request, slug):
 
 def send_email(request):
     if request.POST:
-        company_name=request.POST['company_name']
-        job_desc = request.POST['job_desc']
-        location = request.POST['location']
-        expirence = request.POST['expirence']
-        skill = request.POST['skill']
+        company_id=request.POST['company_id']
         job_id=request.POST['job_id']
         obj = application(user=request.user,job=Job_Opening.objects.get(pk=job_id))
         obj.save()
-    send_mail(
-        'Confirmation mail from MatchMaking',
-        "|||{} ||| {} \\\ {} \\\ {} \\\ {} |||||".format(job_desc,location,expirence,skill,company_name),
-        'varun.er13.6@gmail.com',
-        [request.user.email],
-        fail_silently=False,
-    )
-    return HttpResponse("hello")
+        job_details = Job_Opening.objects.get(pk=job_id)
+        company_details = Company.objects.get(pk=company_id)
+        send_mail(
+            'Confirmation mail from MatchMaking',
+            "|||{} ||| {} \\\ {} \\\ {} \\\  |||||".format(job_details.jobdesc,job_details.experience,job_details.skills,company_details.company_name),
+            'startupmatchmaking@gmail.com',
+            ['arjunarora2324@gmail.com'],
+            fail_silently=False,
+        )
+        return HttpResponse("Confirmation email sent by StartUp MatchMaking")
+
+    return HttpResponse("some error occured")

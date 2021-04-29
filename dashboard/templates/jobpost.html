@@ -29,7 +29,13 @@
   <p>{{job.skills}}</p>
   </div>
   <div class="card-footer d-flex justify-content-center align-items-center">
-    <a href="#" class="btn btn-primary">Apply Now</a>
+    <form action='send_email' method="POST">
+      {% csrf_token %}
+      <input type='hidden' name='company_id' value={{job.company.id}}>
+      <input type='hidden' name='job_id' value={{job.id}}>
+      </div>
+      <button type="submit" class="btn btn-primary">Apply</button>
+    </form>
   </div>
 </div>
 

@@ -9,63 +9,23 @@
 
 {% for job in job_opening %}
 
-<div class="card my-5">
-  <div class="card-header">
-    {{job.title}}<br>
-    {{job.company}}
-  </div>
-  <div class="card-body">
-    <p class="card-text">Start Date: {{job.statdate}}</p>
-    <p class="card-text">Apply By: {{job.endate}}</p>
-    <p class="card-text">Salary: {{job.salary}}</p>
-  </div>
-  <div class="card-footer">
-    <p class="card-text">{{job.jobtype}}</p>
-    <a href="{{job.slug}}" class="btn btn-primary">view details</a>
-    
-  </div>
-</div>
-
-    <h1>Dear Applicant You are eligible for the following jobs</h1>
-    {% comment %} <p>{{job_opening}}</p> {% endcomment %}
-    {% comment %} <p>{{job_opening.job_desc}}</p> {% endcomment %}
-    <br>
-    <br>
-    {% comment %} <p>{{job_opening.skill}}</p> {% endcomment %}
-   
-    {% for row in job_opening %}
-    <div class="card">
-      <div class="container">
-      <h2>{{row.company.company_name}}</h2>
-        <p id='des'><b>Job Description:</b> {{row.job_desc}}</p>
-        {% comment %} <br> {% endcomment %}
-        <p id='des'><b>Skill:</b> {{row.skill}}</p>
-        {% comment %} <br> {% endcomment %}
-        <p id='des'><b>Minimum Experience Required:</b> {{row.expirence}} Years</p>
-        {% comment %} <br> {% endcomment %}
-        <p id='des'><b>Job Location:</b> {{row.location}}</p>
-        </div>
-
-        <form action="send_email" method="POST">
-          {% csrf_token %}
-          <input type='hidden' name='company_name' value={{row.company.company_name}}>
-          <input type='hidden' name='job_desc' value={{row.job_desc}}>
-          <input type='hidden' name='skill' value={{row.skill}}>
-          <input type='hidden' name='expirence' value={{row.expirence}}>
-          <input type='hidden' name='location' value={{row.location}}>
-          <input type='hidden' name='job_id' value={{row.id}}>
-          </div>
-          <button>detial<button>
-          <button type="submit">Apply</button>
-        </form>
+  <div class="card my-5">
+    <div class="card-header">
+      {{job.title}}<br>
+      {{job.company}}
     </div>
-        
-        <br>
-        <br><br><br>
-    {% endfor %}
+    <div class="card-body">
+      <p class="card-text">Start Date: {{job.statdate}}</p>
+      <p class="card-text">Apply By: {{job.endate}}</p>
+      <p class="card-text">Salary: {{job.salary}}</p>
+    </div>
+    <div class="card-footer">
+      <p class="card-text">{{job.jobtype}}</p>
+      <a href="{{job.slug}}" class="btn btn-primary">view details</a>
+      
+    </div>
+  </div>
 
-
-    {% comment %} {{user_job_opening.find({"skill":{{skill}}})}}. {% endcomment %}
 {% endfor %}
 
 
