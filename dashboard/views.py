@@ -8,12 +8,16 @@ def applicantdashboard(request):
 
 def joblist(request):
     tag = request.POST.get('skill')
-    
-    job_opening = Job_Opening.objects.filter(skill=tag)
-    
-  
+    job_opening = Job_Opening.objects.filter(title=tag)
     context = {'job_opening': job_opening}
     return render(request,'joblist.html',context)
+
+def jobpost(request, slug):
+    job = Job_Opening.objects.get(slug=slug)
+    context = {
+        'job':job
+    }
+    return render(request, 'jobpost.html', context)
 
 def send_email(request):
     if request.POST:
