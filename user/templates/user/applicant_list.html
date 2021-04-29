@@ -1,23 +1,21 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Home
+List of Applicants
 {% endblock title %}
 
 {% block body %}
 <div class="container">
-{{applicant_list}}
+<h2> List of Applicants applied for this opening </h2>
 {% for row in applicant_list %}
 
 <div class="card my-5">
 <div class="card-header">
-jdfnqifnwifnj
-{{row.user.first_name}}
-{{row.user.last_name}}
+Username: {{row.user.username}}
 </div>
 <div class="card-body">
-<p class="card-text">Start Date: {{row.user.email}}</p>
-<p class="card-text">Apply By: {{row.user.username}}</p>
+<p class="card-text">Name: {{row.user.first_name}}{{row.user.last_name}}</p>
+<p class="card-text">Email: {{row.user.email}}</p>
 
 </div>
 <div class="card-footer">

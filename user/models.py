@@ -166,5 +166,5 @@ class application(models.Model):
     job = models.ForeignKey(Job_Opening, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.username+ "-" + self.job.skill 
+        return self.user.username+ "-" + self.job.skills 
     
