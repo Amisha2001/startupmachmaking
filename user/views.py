@@ -123,7 +123,7 @@ def account(request):
                     new_resume = Resume(user=request.user, desc=bio, avatar=avatar, phn_no=ph_no, primary_city=primary_city, secondary_city=secondary_city)
                     new_resume.save()
                     print('saved')
-                    return redirect('/dashboard/applicant')  #temporary
+                    return redirect('account')  #temporary
                     #arpit(113,114,115)
             elif Resume.objects.filter(user=request.user):
                      return redirect('/dashboard/applicant')
@@ -176,5 +176,19 @@ def signup(request):
         context['signup_form'] = form
     return render(request, 'user/signup.html', context)
 
-def jobsapplied(request):
-    return render(request, "user/jobsapplied.html")
+
+def profile(request):
+   
+    try:
+        resume = Resume.objects.get(user=request.user)
+        skill = Skill.objects.get(user=request.user)
+        education = Education.objects.get(user=request.user)
+        job = Job.objects.get(user=request.user)
+        portfolio = Portfolio.objects.get(user=request.user)
+        accomplishments = Accomplishments.objects.get(user=request.user)
+        context = {'resume': resume, 'skills': skill, 'educations': education, 'jobs': job, 'portfolios': portfolio, 'accomplishments': accomplishments}
+        # print(context,"kkkkkkkkkkkkkkkkk")
+        return render(request, "user/profile.html", context)
+    except:
+        return HttpResponse("aaaaa")
+
