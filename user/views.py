@@ -43,6 +43,13 @@ def account(request):
                     #arpit(44)
                     jobs_opened=Job_Opening.objects.filter(company=company_id)
                     return render(request, 'user/founder_dashboard.html', {'job_opened':jobs_opened, 'company_id':company_id})
+                elif name=="applied_appl":
+                    job_id=request.POST['job_id']
+                    print('aaaaaaaaaaaaaaaaaaaaa')
+                    applicant_list = application.objects.filter(job=Job_Opening.objects.get(pk=job_id))
+                    print('aaaaaaaaaaaaaaaaaaaaa')
+                    return render(request, 'user/applicant_list.html', {'applicant_list':applicant_list})
+
             try:
 
                 company = Company.objects.get(user=request.user)

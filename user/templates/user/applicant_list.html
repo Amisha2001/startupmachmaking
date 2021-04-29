@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block body %}
+<div class="container">
+{{applicant_list}}
+{% for row in applicant_list %}
+
+<div class="card my-5">
+<div class="card-header">
+jdfnqifnwifnj
+{{row.user.first_name}}
+{{row.user.last_name}}
+</div>
+<div class="card-body">
+<p class="card-text">Start Date: {{row.user.email}}</p>
+<p class="card-text">Apply By: {{row.user.username}}</p>
+
+</div>
+<div class="card-footer">
+{% comment %} <p class="card-text">{{job.jobtype}}</p>
+<a href="{{job.slug}}" class="btn btn-primary">view details</a> {% endcomment %}
+
+</div>
+{% endfor %}
+</div>
+{% endblock body %}

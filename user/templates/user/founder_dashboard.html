@@ -104,6 +104,13 @@
         {% comment %} <p><button>Apply</button></p> {% endcomment %}
     </div>
         
+        <form action="{% url 'account' %}" method='POST'>
+        {% csrf_token %}
+         <input type="hidden" name="name" value="applied_appl">
+        <input type="hidden" value={{row.id}} name="job_id">
+        <button type="submit" class="btn btn-primary">Applied Applicants</button>
+
+        </form>
         <br>
         <br><br><br>
     {% endfor %}

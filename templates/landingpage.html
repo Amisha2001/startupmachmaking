@@ -1,8 +1,316 @@
-{% extends 'base.html' %}
-{% block title %}Home{% endblock title %} 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <title>PHPJabbers.com | Free Job Agency Website Template</title>
+
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+     <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+     {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"> {% endcomment %}
+         
+</head>
+<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+     <!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+               <span class="spinner-rotate"></span>
+          </div>
+     </section>
 
 
-{% block body %}
-This is our landing page
+     <!-- MENU -->
+     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+          
+          <div class="container">
 
-{% endblock body %}
+               <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+                    <a href="#" class="navbar-brand"><h3>StartUp MatchMaking</h3></a>
+               </div>
+
+               <!-- MENU LINKS -->
+                {% if request.user.is_authenticated %}
+               <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-nav-first">
+                         <li class="active"><a href="index.html">Home</a></li>
+                         <li><a href="job-listing.html">Jobs</a></li>
+                         <li><a href="about-us.html">About Us</a></li>
+                         <li><a href="blog-posts.html">Blog</a></li>
+                         <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
+                              
+                              <ul class="dropdown-menu">
+                                   <li><a class="dropdown-item" href="{% url 'account' %}">My Profile</a></li>
+                                   <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                                   {% comment %} <li><a href="terms.html">Terms</a></li> {% endcomment %}
+                              </ul>
+                         </li>
+                         {% comment %} <li><a href="contact.html">Contact Us</a></li> {% endcomment %}
+                    </ul>
+                     {% else %}
+                     <a class="btn btn-primary mx-2" style="margin-right:1rem;" href="{% url 'login' %}" role="button">Login</a>
+                    <a class="btn btn-primary"  style="margin-right:1rem;" href="{% url 'signup' %}" role="button">Signup</a>
+                    {% endif %}
+               </div>
+
+          </div>
+     </section>
+
+     <!-- HOME -->
+     <section id="home">
+          <div class="row">
+               <div class="owl-carousel owl-theme home-slider">
+                    <div class="item item-first">
+                         <div class="caption">
+                              <div class="container">
+                                   <div class="col-md-6 col-sm-12">
+                                        <h1>Lorem ipsum dolor sit amet.</h1>
+                                        <h3>Voluptas dignissimos esse, explicabo cum fugit eaque, perspiciatis quia ab nisi sapiente delectus eiet.</h3>
+                                        <a href="jobs.html" class="section-btn btn btn-default">Browse Jobs</a>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="item item-second">
+                         <div class="caption">
+                              <div class="container">
+                                   <div class="col-md-6 col-sm-12">
+                                        <h1>Distinctio explicabo vero animi culpa facere voluptatem.</h1>
+                                        <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, excepturi.</h3>
+                                        <a href="jobs.html" class="section-btn btn btn-default">Browse Jobs</a>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="item item-third">
+                         <div class="caption">
+                              <div class="container">
+                                   <div class="col-md-6 col-sm-12">
+                                        <h1>Efficient Learning Methods</h1>
+                                        <h3>Nam eget sapien vel nibh euismod vulputate in vel nibh. Quisque eu ex eu urna venenatis sollicitudin ut at libero.</h3>
+                                        <a href="jobs.html" class="section-btn btn btn-default">Browse Jobs</a>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+     <main>
+          <section>
+               <div class="container">
+                    <div class="row">
+                         <div class="col-md-12 col-sm-12">
+                              <div class="text-center">
+                                   <h2>About us</h2>
+
+                                   <br>
+
+                                   <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore molestias ipsa veritatis nihil iusto maiores natus dolor, a reiciendis corporis obcaecati ex. Totam assumenda impedit aut eum, illum distinctio saepe explicabo. Consequuntur molestiae similique id quos, quasi quas perferendis laboriosam, fugit natus odit totam! Id dolores saepe, sint debitis rerum dolorem tempora aliquid, pariatur enim nisi. Quia ab iusto assumenda.</p>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </section>
+
+
+
+         
+
+          <section id="testimonial">
+               <div class="container">
+                    <div class="row">
+
+                         <div class="col-md-12 col-sm-12">
+                              <div class="section-title text-center">
+                                   <h2>Testimonials <small>from around the world</small></h2>
+                              </div>
+
+                              <div class="owl-carousel owl-theme owl-client">
+                                   <div class="col-md-4 col-sm-4">
+                                        <div class="item">
+                                             <div class="tst-image">
+                                                  <img src="{% static 'images/tst-image-1-200x216.jpg' %}" class="img-responsive" alt="">
+                                             </div>
+                                             <div class="tst-author">
+                                                  <h4>Jackson</h4>
+                                                  <span>Shopify Developer</span>
+                                             </div>
+                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam voluptas, facilis adipisci dolorem exercitationem nemo aut error impedit repudiandae iusto.</p>
+                                             <div class="tst-rating">
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                             </div>
+                                        </div>
+                                   </div>
+
+                                   <div class="col-md-4 col-sm-4">
+                                        <div class="item">
+                                             <div class="tst-image">
+                                                  <img src="{% static 'images/tst-image-2-200x216.jpg' %}" class="img-responsive" alt="">
+                                             </div>
+                                             <div class="tst-author">
+                                                  <h4>Camila</h4>
+                                                  <span>Marketing Manager</span>
+                                             </div>
+                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente error, unde eos laborum consequatur officiis perferendis vel debitis, dolore, ipsum quibusdam culpa quisquam, reiciendis aspernatur.</p>
+                                             <div class="tst-rating">
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                             </div>
+                                        </div>
+                                   </div>
+
+                                   <div class="col-md-4 col-sm-4">
+                                        <div class="item">
+                                             <div class="tst-image">
+                                                  <img src="{% static 'images/tst-image-3-200x216.jpg' %}" class="img-responsive" alt="">
+                                             </div>
+                                             <div class="tst-author">
+                                                  <h4>Barbie</h4>
+                                                  <span>Art Director</span>
+                                             </div>
+                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit laborum minima autem, reprehenderit mollitia amet id, beatae quo sequi culpa assumenda neque a quisquam, magni.</p>
+                                             <div class="tst-rating">
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                             </div>
+                                        </div>
+                                   </div>
+
+                                   <div class="col-md-4 col-sm-4">
+                                        <div class="item">
+                                             <div class="tst-image">
+                                                  <img src="{% static 'images/tst-image-4-200x216.jpg' %}" class="img-responsive" alt="">
+                                             </div>
+                                             <div class="tst-author">
+                                                  <h4>Andrio</h4>
+                                                  <span>Web Developer</span>
+                                             </div>
+                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore natus culpa laudantium sit dolores quidem at nulla, iure atque laborum! Odit tempora, enim aliquid at modi illum ducimus explicabo soluta.</p>
+                                             <div class="tst-rating">
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                                  <i class="fa fa-star"></i>
+                                             </div>
+                                        </div>
+                                   </div>
+
+                              </div>
+                        </div>
+                    </div>
+               </div>
+          </section> 
+     </main>
+
+    
+
+     <!-- FOOTER -->
+     <footer id="footer">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-4 col-sm-6">
+                         <div class="footer-info">
+                              <div class="section-title">
+                                   <h2>Headquarter</h2>
+                              </div>
+                              <address>
+                                   <p>xxxxxx <br>xxxxxx</p>
+                              </address>
+
+                              <ul class="social-icon">
+                                   <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                                   <li><a href="#" class="fa fa-twitter"></a></li>
+                                   <li><a href="#" class="fa fa-instagram"></a></li>
+                              </ul>
+
+                              {% comment %} <div class="copyright-text"> 
+                                   <p>Copyright &copy; 2020 Company Name</p>
+                                   {% comment %} <p>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></p> 
+                              </div> {% endcomment %}
+                         </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6">
+                         <div class="footer-info">
+                              <div class="section-title">
+                                   <h2>Contact Info</h2>
+                              </div>
+                              <address>
+                                   <p>+1 333 4040 5566</p>
+                                   <p><a href="mailto:contact@company.com">startupmatchmaking@gmail.com</a></p>
+                              </address>
+
+                              <div class="footer_menu">
+                                   <h2>Quick Links</h2>
+                                   <ul>
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="about-us.html">About Us</a></li>
+                                        <li><a href="terms.html">Terms & Conditions</a></li>
+                                        <li><a href="contact.html">Contact Us</a></li>
+                                   </ul>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12">
+                         <div class="footer-info newsletter-form">
+                              <div class="section-title">
+                                   <h2>Newsletter Signup</h2>
+                              </div>
+                              <div>
+                                   <div class="form-group">
+                                        <form action="#" method="get">
+                                             <input type="email" class="form-control" placeholder="Enter your email" name="email" id="email" required>
+                                             <input type="submit" class="form-control" name="submit" id="form-submit" value="Send me">
+                                        </form>
+                                        <span><sup>*</sup> Please note - we do not spam your email.</span>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                    
+               </div>
+          </div>
+     </footer>
+
+     <!-- SCRIPTS -->
+     <script src="{% static 'js/jquery.js' %}"></script>
+     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+     <script src="{% static 'js/smoothscroll.js' %}"></script>
+     <script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>

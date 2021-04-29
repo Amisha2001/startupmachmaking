@@ -22,6 +22,9 @@ def send_email(request):
         location = request.POST['location']
         expirence = request.POST['expirence']
         skill = request.POST['skill']
+        job_id=request.POST['job_id']
+        obj = application(user=request.user,job=Job_Opening.objects.get(pk=job_id))
+        obj.save()
     send_mail(
         'Confirmation mail from MatchMaking',
         "|||{} ||| {} \\\ {} \\\ {} \\\ {} |||||".format(job_desc,location,expirence,skill,company_name),
