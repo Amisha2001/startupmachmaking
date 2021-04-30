@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import SignupForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from datetime import datetime
+from django.contrib import messages
 from .models import *
 
 
@@ -140,11 +141,23 @@ def account(request):
                     print('saved')
                     return redirect('account')  #temporary
                     #arpit(113,114,115)
+                elif name=='dashboard':
+                    if Resume.objects.filter(user=request.user) and  Accomplishments.objects.filter(user=request.user) and Skill.objects.filter(user=request.user) and Portfolio.objects.filter(user=request.user) and Job.objects.filter(user=request.user) and Education.objects.filter(user=request.user):
+                        return redirect('/dashboard/applicant')
+                    else:
+                        messages.info(request,'Please fill all details to go to dashboard.')
+                        return render(request,'user/account.html') 
                 elif Resume.objects.filter(user=request.user) and  Accomplishments.objects.filter(user=request.user) and Skill.objects.filter(user=request.user) and Portfolio.objects.filter(user=request.user) and Job.objects.filter(user=request.user) and Education.objects.filter(user=request.user):
                     return redirect('/dashboard/applicant')
                 else:
-                    return render(request,'user/account.html')         
-            return redirect('/dashboard/applicant')
+                    return render(request,'user/account.html')   
+                return redirect('/dashboard/applicant')
+            else:
+                if Resume.objects.filter(user=request.user) and  Accomplishments.objects.filter(user=request.user) and Skill.objects.filter(user=request.user) and Portfolio.objects.filter(user=request.user) and Job.objects.filter(user=request.user) and Education.objects.filter(user=request.user):
+                    return redirect('/dashboard/applicant')
+                else:
+                    # messages.info(request,'Please fill all details to go to dashboard.')
+                    return render(request,'user/account.html')  
     return redirect('/')
 
 def usrlogin(request):

@@ -298,14 +298,23 @@ loded dashboard for employee
   <br><br>
   <form action="{% url 'account' %}"  method='POST'>
   {% csrf_token %}
+    <input type="hidden" name="name" value="dashboard"> 
    <button class="btn btn-primary" type="submit">Click here to go to your Dashboard</button>
 
   </form>
 {% comment %} {% endif %} {% endcomment %}
-
+  {% comment %} <div>
+  {% for message in messages %}
+    <h3>{{message}}</h3>
+  {% endfor %}
+  </div> {% endcomment %}
 {% endif %}
 
   {% endif %}
 </div>
-
+  <div>
+  {% for message in messages %}
+    <h4>{{message}}</h4>
+  {% endfor %}
+  </div>
 {% endblock body %}
