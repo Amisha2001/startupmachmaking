@@ -5,7 +5,33 @@ List of Applicants
 {% endblock title %}
 
 {% block body %}
-<div class="container">
+
+<h2 style="text-align:center">List of Applicants applied</h2><br>
+
+{% for row in applicant_list %}
+    <div class="profilecard">
+    {% comment %} <img src="/w3images/team2.jpg" alt="John" style="width:100%"> {% endcomment %}
+    
+    <h3>{{row.user.first_name}} {{row.user.last_name}}</h3>
+    <p class="profiletitle">{{row.user.email}}</p>
+    {% comment %} <p>Harvard University</p> {% endcomment %}
+    {% comment %} <div style="margin: 24px 0;">
+        <a href="#"><i class="fa fa-dribbble"></i></a> 
+        <a href="#"><i class="fa fa-twitter"></i></a>  
+        <a href="#"><i class="fa fa-linkedin"></i></a>  
+        <a href="#"><i class="fa fa-facebook"></i></a> 
+    </div> {% endcomment %}
+    <form action="{% url 'account' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="name" value="app_profile"> 
+        <input type="hidden" name="applicant_id" value={{row.user.email}}> 
+        <p><button class="profilebutton">View Full Profile</button></p>
+    </form>
+    </div>
+    <br>
+{% endfor %}
+
+{% comment %} <div class="container">
 <h2> List of Applicants applied for this opening </h2>
 {% for row in applicant_list %}
 
@@ -19,10 +45,7 @@ Username: {{row.user.username}}
 
 </div>
 <div class="card-footer">
-{% comment %} <p class="card-text">{{job.jobtype}}</p>
-<a href="{{job.slug}}" class="btn btn-primary">view details</a> {% endcomment %}
-
 </div>
 {% endfor %}
-</div>
+</div> {% endcomment %}
 {% endblock body %}

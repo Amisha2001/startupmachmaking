@@ -22,7 +22,19 @@ def account(request):
         if request.user.is_startup_founder:
             if request.POST:
                 name = request.POST.get('name')
-                if name=="company_detail":
+                if name=="app_profile":
+                    applicant_id = request.POST['applicant_id']
+                    
+                    applicant = User.objects.get(pk=applicant_id)
+                    resume = Resume.objects.get(user = applicant)
+                    accomplishments = Accomplishments.objects.get(user = applicant)
+                    education = Education.objects.get(user = applicant)
+                    job = Job.objects.get(user = applicant)
+                    skill = Skill.objects.get(user = applicant)
+                    portfolio = Portfolio.objects.get(user = applicant)
+                    context = {'applicant':applicant,'resume': resume, 'skill': skill, 'education': education, 'job': job, 'portfolio': portfolio, 'accomplishment': accomplishments}                    
+                    return render(request,"user/profile.html",context)
+                elif name=="company_detail":
                     comp_name = request.POST['comp_name']
                     comp_desc = request.POST['comp_desc']
                     comp_logo = request.POST['comp_logo']
@@ -54,6 +66,7 @@ def account(request):
                     print('aaaaaaaaaaaaaaaaaaaaa')
                     applicant_list = application.objects.filter(job=Job_Opening.objects.get(pk=job_id))
                     print('aaaaaaaaaaaaaaaaaaaaa')
+
                     return render(request, 'user/applicant_list.html', {'applicant_list':applicant_list})
 
             try:
@@ -132,7 +145,7 @@ def account(request):
                 else:
                     return render(request,'user/account.html')         
             return redirect('/dashboard/applicant')
-    return redirect('login')
+    return redirect('/')
 
 def usrlogin(request):
     context = {}
@@ -156,7 +169,7 @@ def usrlogin(request):
 
 def usrlogout(request):
     logout(request)
-    return redirect('account')
+    return redirect('/')
 
 def signup(request):
     context = {}
@@ -180,10 +193,10 @@ def signup(request):
 
 
 def profile(request):
-        
+    
     try:
+        applicant = request.user
         resume = Resume.objects.get(user=request.user)
-        
         skill = Skill.objects.get(user=request.user)
         education = Education.objects.get(user=request.user)
         job = Job.objects.get(user=request.user)
