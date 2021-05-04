@@ -230,15 +230,17 @@ def signup(request):
 def profile(request):
     
     try:
+        print("kkkkkkkkkkkkkkkkk")
         applicant = request.user
+        print("kkkkkkkkkkkkkkkkk00000")
         resume = Resume.objects.get(user=request.user)
         skill = Skill.objects.get(user=request.user)
         education = Education.objects.get(user=request.user)
         job = Job.objects.get(user=request.user)
         portfolio = Portfolio.objects.get(user=request.user)
         accomplishments = Accomplishments.objects.get(user=request.user)
-        context = {'resume': resume, 'skills': skill, 'educations': education, 'jobs': job, 'portfolios': portfolio, 'accomplishments': accomplishments}
-        # print(context,"kkkkkkkkkkkkkkkkk")
+        context = {'applicant':applicant,'resume': resume, 'skills': skill, 'educations': education, 'jobs': job, 'portfolios': portfolio, 'accomplishments': accomplishments}
+        print("kkkkkkkkkkkkkkkkk")
         
         return render(request, "user/profile.html", context)
     except:

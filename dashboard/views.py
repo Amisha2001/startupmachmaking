@@ -21,8 +21,17 @@ def joblist(request):
 
 def jobpost(request, slug):
     job = Job_Opening.objects.get(slug=slug)
+    var=True
+    stat=""
+    if application.objects.filter(user=request.user,job=job):
+        var=False
+        stat=application.objects.get(user=request.user,job=job).status
+    else:
+        var=True
+        
+
     context = {
-        'job':job
+        'job':job,'var':var,'status':stat
     }
     return render(request, 'jobpost.html', context)
 
