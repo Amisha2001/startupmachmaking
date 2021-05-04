@@ -6,14 +6,15 @@
         <h3>{{applicant.username}}</h3>
         <h3>{{applicant.first_name}} {{applicant.last_name}}</h3>
         <p>{{resume.desc}}</p>
-        {% if request.user.is_startup_founder %}
-        {% else %}
-        <button class="btn btn-primary">Edit Resume</button>
-        {% endif %}
         <p>{{resume.phn_no}}</p>
         <p>{{resume.primary_city}}</p>
         <p>{{resume.secondary_city}}</p>
         <p>{{accomplishment.desc}}</p>
       </div>
+      {% if request.user.is_startup_founder %}
+      {% else %}
+        <button class="btn btn-primary">Edit Resume</button>
+      {% endif %}
+      
 </div>
 {% endblock body %}

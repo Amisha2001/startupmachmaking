@@ -2,13 +2,20 @@ from django.shortcuts import render
 from user.models import *
 from django.http import HttpResponse
 from django.core.mail import send_mail
+from datetime import date
 
 def applicantdashboard(request):    
     return render(request,'applicantdashboard.html')
 
 def joblist(request):
     tag = request.POST.get('skill')
+    datep=date.today()
     job_opening = Job_Opening.objects.filter(title=tag)
+
+    for job in job_opening:
+        if datep>job.endate:
+            job_opening=job_opening.exclude(endate=job.endate)
+
     context = {'job_opening': job_opening}
     return render(request,'joblist.html',context)
 

@@ -14,38 +14,34 @@ List of Applicants
     
     <h3>{{row.user.first_name}} {{row.user.last_name}}</h3>
     <p class="profiletitle">{{row.user.email}}</p>
-    {% comment %} <p>Harvard University</p> {% endcomment %}
-    {% comment %} <div style="margin: 24px 0;">
-        <a href="#"><i class="fa fa-dribbble"></i></a> 
-        <a href="#"><i class="fa fa-twitter"></i></a>  
-        <a href="#"><i class="fa fa-linkedin"></i></a>  
-        <a href="#"><i class="fa fa-facebook"></i></a> 
-    </div> {% endcomment %}
+
     <form action="{% url 'account' %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="name" value="app_profile"> 
         <input type="hidden" name="applicant_id" value={{row.user.email}}> 
         <p><button class="profilebutton">View Full Profile</button></p>
+
+    </form>
+
+    <form action="{% url 'account' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="name" value="selection">
+        <input type="hidden" value="selected" name="status">
+        <input type="hidden" value={{job_id}} name="job_id">
+        <input type="hidden" name="applicant_id" value={{row.user.email}}> 
+        <button class="btn btn-primary">Select</button>
+    </form>
+
+    <form action="{% url 'account' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="name" value="selection">
+        <input type="hidden" value="rejected" name="status">
+        <input type="hidden" value={{job_id}} name="job_id">
+        <input type="hidden" name="applicant_id" value={{row.user.email}}> 
+        <button class="btn btn-primary">Reject</button>
     </form>
     </div>
     <br>
 {% endfor %}
 
-{% comment %} <div class="container">
-<h2> List of Applicants applied for this opening </h2>
-{% for row in applicant_list %}
-
-<div class="card my-5">
-<div class="card-header">
-Username: {{row.user.username}}
-</div>
-<div class="card-body">
-<p class="card-text">Name: {{row.user.first_name}}{{row.user.last_name}}</p>
-<p class="card-text">Email: {{row.user.email}}</p>
-
-</div>
-<div class="card-footer">
-</div>
-{% endfor %}
-</div> {% endcomment %}
 {% endblock body %}

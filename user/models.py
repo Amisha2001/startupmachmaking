@@ -164,7 +164,7 @@ class Job_Opening(models.Model):
 class application(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job = models.ForeignKey(Job_Opening, on_delete=models.CASCADE)
-
+    status = models.CharField(max_length=255,default="in progress")
     def __str__(self):
         return self.user.username+ "-" + self.job.skills 
     

@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from datetime import datetime
 from django.contrib import messages
 from .models import *
-
+from django.core.mail import send_mail
 
 # Create your views here.
 def account(request):
@@ -68,8 +68,30 @@ def account(request):
                     applicant_list = application.objects.filter(job=Job_Opening.objects.get(pk=job_id))
                     print('aaaaaaaaaaaaaaaaaaaaa')
 
-                    return render(request, 'user/applicant_list.html', {'applicant_list':applicant_list})
+                    return render(request, 'user/applicant_list.html', {'applicant_list':applicant_list,"job_id":job_id})
+                
+                elif name=="selection":
+                    status=request.POST['status']
+                    job_id=request.POST['job_id']
+                    applicant_id=request.POST['applicant_id']
 
+                    # app=application.objects.filter(user=User.objects.get(pk=applicant_id),job=Job_Opening.objects.get(pk=job_id))
+                    application.objects.filter(user=User.objects.get(pk=applicant_id),job=Job_Opening.objects.get(pk=job_id)).update(status=status)
+                    # app.refresh_from_db()
+
+                    job_op=Job_Opening.objects.get(pk=job_id)
+
+                    applicant_list = application.objects.filter(job=Job_Opening.objects.get(pk=job_id))
+
+                    send_mail(
+                        'Confirmation mail from MatchMaking',
+                        "||| {} for the job{} of the company {} |||".format(status,job_op.title,job_op.company.company_name),
+                        'startupmatchmaking@gmail.com',
+                        ['arjunarora2324@gmail.com'],
+                        fail_silently=False,
+                    )
+                    return render(request, 'user/applicant_list.html', {'applicant_list':applicant_list,"job_id":job_id})
+                    
             try:
 
                 company = Company.objects.get(user=request.user)
