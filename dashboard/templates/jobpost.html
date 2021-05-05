@@ -30,7 +30,7 @@
   </div>
   {{var}} jnfkjnineviueuhgiueveg
   <div class="card-footer d-flex justify-content-center align-items-center">
-    {% if var %}
+  {% if var %}
     <form action='send_email' method="POST">
       {% csrf_token %}
       <input type='hidden' name='company_id' value={{job.company.id}}>
@@ -39,11 +39,9 @@
 
       <button type="submit" class="btn btn-primary">Apply</button>
     </form>
-    {% else %}
-      
-         <h4>{{status}}<h4> 
-     {% endif %} 
-
+  {% else %}
+      <h4>{{status}}<h4> 
+  {% endif %} 
   </div>
 </div>
 

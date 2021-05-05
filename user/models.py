@@ -72,7 +72,7 @@ class User(AbstractBaseUser):
 class Resume(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     desc = models.CharField(max_length=1000)
-    avatar = models.ImageField(upload_to="image/user/avatar", null=True)
+    avatar = models.ImageField(upload_to="profile_image", null=True)
     phn_no  = models.BigIntegerField(unique=True)
     primary_city = models.CharField(max_length=100)
     secondary_city = models.CharField(max_length=100)

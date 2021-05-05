@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
-
 {% block title %}{{applicant.username}} {% endblock title %}
 
 {% block body %}
 
 <div class="container">
-{{applicant}}
-<h1 class="text-center my-3">Name: {{applicant.first_name}} {{applicant.last_name}}</h1>
+{% comment %} {{applicant}} {% endcomment %}
+
+<img src="{{resume.avatar.url}}" style="display: block; margin-left: auto; margin-right: auto; border-radius: 50%;" width="300px" height="300px" alt="Uh! Oh!">
+<h1 class="text-center my-3">{{applicant.first_name}} {{applicant.last_name}}</h1>
 
 <div class="card my-5">
   <div class="card-body">
-    <h3>Resumelol</h3>
-    <h5 class="text-muted">{{resume.desc}}</h5>
+    <h5 class="text-muted"  style="text-align:center;">{{resume.desc}}</h5>
   <hr>
+  <h5>Personal details</h5>
   <p>phn_no: {{resume.phn_no}}</p>
   <p>primary_city: {{resume.primary_city}}</p>
   <p>secondary_city: {{resume.secondary_city}}</p>
-
+  <hr>
   <h5>Education</h5>
   <pre>college: {{education.college}}</pre>
   <p>stream: {{education.stream}}</p>
@@ -41,7 +42,5 @@
 </div>
 
 </div>
-
-
 
 {% endblock body %}

@@ -240,7 +240,7 @@ def profile(request):
         portfolio = Portfolio.objects.get(user=request.user)
         accomplishments = Accomplishments.objects.get(user=request.user)
         context = {'applicant':applicant,'resume': resume, 'skills': skill, 'educations': education, 'jobs': job, 'portfolios': portfolio, 'accomplishments': accomplishments}
-        print("kkkkkkkkkkkkkkkkk")
+        # print(context,"kkkkkkkkkkkkkkkkk")
         
         return render(request, "user/profile.html", context)
     except:
