@@ -59,11 +59,35 @@
 
 {% endif %}
 {% else %}
-{% comment %} {% if resume %}
+{% if resume %}
+<form action="{% url 'account' %}" method='POST'>
+  {% csrf_token %}
+  <input type="hidden" name="name" value="edited_appl_res">
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" name="bio" value={{resume.desc}} id="floatingInput" placeholder="Bio" required>
+    <label for="floatingInput">Bio</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="phone" class="form-control" name="ph_no" value={{resume.phn_no }} id="floatingInput" placeholder="Phone Number" required>
+    <label for="floatingInput">Phone Number</label>
+  </div>
+  <div class="input-group mb-3">
+    <label class="input-group-text" for="inputGroupFile01">Avatar</label>
+    <input type="file" class="form-control" id="inputGroupFile01" name="avatar" value={{resume.avatar }} required>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" name="pri_city" value={{resume.primary_city}} id="floatingInput" placeholder="Primary City" required>
+    <label for="floatingInput">Primary City</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" name="sec_city" value={{resume.secondary_city}} id="floatingInput" placeholder="Secondary City" required>
+    <label for="floatingInput">Secondary City</label>
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
 
-loded dashboard for employee
 
-{% else %} {% endcomment %}
+{% else %}
 
 <form action="{% url 'account' %}" method='POST'>
   {% csrf_token %}
@@ -329,6 +353,7 @@ loded dashboard for employee
     <h3>{{message}}</h3>
   {% endfor %}
   </div> {% endcomment %}
+  {% endif %}
 {% endif %}
 
   {% endif %}

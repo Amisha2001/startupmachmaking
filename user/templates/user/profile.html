@@ -14,24 +14,30 @@
     <h5 class="text-muted"  style="text-align:center;">{{resume.desc}}</h5>
   <hr>
   <h5>Personal details</h5>
-  <p>phn_no: {{resume.phn_no}}</p>
-  <p>primary_city: {{resume.primary_city}}</p>
-  <p>secondary_city: {{resume.secondary_city}}</p>
+  <p>Phone_no: {{resume.phn_no}}</p>
+  <p>Primary City: {{resume.primary_city}}</p>
+  <p>Secondary City: {{resume.secondary_city}}</p>
   <hr>
   <h5>Education</h5>
-  <pre>college: {{education.college}}</pre>
-  <p>stream: {{education.stream}}</p>
-  <p>status: {{education.status}}</p>
+  <pre>College: {{educations.college}}</pre>
+  <p>stream: {{educations.stream}}</p>
+  {% comment %} <p>status: {{educations.status}}</p> {% endcomment %}
+  {% if educations.status %}
+  <p>Status: Pursuing</p>
+  {% else %}
+  <p>Status: Completed</p>
+  {% endif %}
   <hr>
   <h5>Skills</h5>
-  <p>{{skill.skill_name}}</p>
-  <p>level: {{skill.skill_level}}</p>
+  <p>{{skills.skill_name}}</p>
+  <p>Level: {{skills.skill_level}}</p>
   </div>
   {% if request.user.is_startup_founder %}
   {% else %}      
     <div class="card-footer d-flex justify-content-center align-items-center">
-      <form action='' method="POST">
+      <form action="{% url 'account' %}" method="POST">
         {% csrf_token %}
+        <input type='hidden' name='name' value="edit_appl_resume">
         <input type='hidden' name='company_id' value={{job.company.id}}>
         <input type='hidden' name='job_id' value={{job.id}}>
         </div>

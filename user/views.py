@@ -132,7 +132,33 @@ def account(request):
             if request.POST:
                 name = request.POST.get('name')
                 print('NAME',name)
-                if name == 'edu_form':
+                if name=='edit_appl_resume':
+                    return render(request,'user/account.html',context)
+                elif name=='edited_appl_res':
+                    bio = request.POST['bio']
+                    avatar = request.POST['avatar']
+                    ph_no = request.POST['ph_no']
+                    primary_city = request.POST['pri_city']
+                    secondary_city = request.POST['sec_city']
+                    Resume.objects.filter(user=request.user).update(desc=bio,avatar=avatar,phn_no=ph_no,primary_city= primary_city,secondary_city=secondary_city )
+                    try:
+                        
+                        applicant = request.user
+                       
+                        resume = Resume.objects.get(user=request.user)
+                        skill = Skill.objects.get(user=request.user)
+                        education = Education.objects.get(user=request.user)
+                        job = Job.objects.get(user=request.user)
+                        portfolio = Portfolio.objects.get(user=request.user)
+                        accomplishments = Accomplishments.objects.get(user=request.user)
+                        context = {'applicant':applicant,'resume': resume, 'skills': skill, 'educations': education, 'jobs': job, 'portfolios': portfolio, 'accomplishments': accomplishments}
+                        #print(context,"kkkkkkkkkkkkkkkkk")
+                        
+                        return render(request, "user/profile.html", context)
+                    except:
+                        return HttpResponse("Something went wrong!!!")
+                    
+                elif name == 'edu_form':
                     college = request.POST['college']
                     stream = request.POST['stream']
                     start_year = str(request.POST['start_year'])[:4]
@@ -267,7 +293,7 @@ def profile(request):
         portfolio = Portfolio.objects.get(user=request.user)
         accomplishments = Accomplishments.objects.get(user=request.user)
         context = {'applicant':applicant,'resume': resume, 'skills': skill, 'educations': education, 'jobs': job, 'portfolios': portfolio, 'accomplishments': accomplishments}
-        # print(context,"kkkkkkkkkkkkkkkkk")
+        print(context,"kkkkkkkkkkkkkkkkk")
         
         return render(request, "user/profile.html", context)
     except:
@@ -275,5 +301,16 @@ def profile(request):
         return HttpResponse("Something went wrong!!!")
     
     
+def found_dash(request):
+    try:
 
+        company = Company.objects.get(user=request.user)
+        company_id=company.id
+        jobs_opened=Job_Opening.objects.filter(company=company_id)
+        context = {'company':company,'job_opened':jobs_opened,'company_id':company_id}
+        return render(request, 'user/founder_dashboard.html', context)
+    except:
+        # context = {}
+        # return render(request,'user/account.html',context)
+        return HttpResponse('Something went wrong....sorry!!')
 

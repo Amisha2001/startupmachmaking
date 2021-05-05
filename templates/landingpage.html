@@ -55,7 +55,7 @@
                     <ul class="nav navbar-nav navbar-nav-first">
 
                        {% if request.user.is_authenticated %}
-                         {% comment %} <li class="active">Hello, {{request.user.first_name}}</li> {% endcomment %}
+                         
                          <li><a><b>Hello, {{request.user.first_name}}</b></a></li>
                          <li><a href="{% url 'profile' %}"><b>My Profile</b></a></li>
                          <li><a href="{% url 'logout' %}"><b>Logout</b></a></li>
