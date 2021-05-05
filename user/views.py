@@ -23,7 +23,31 @@ def account(request):
         if request.user.is_startup_founder:
             if request.POST:
                 name = request.POST.get('name')
-                if name=="app_profile":
+                if name=='edit_comp_profile':
+                    try:
+                        company = Company.objects.get(user=request.user)
+                        #arpit(49,50,51)
+                        company_id=company.id
+                        # jobs_opened=Job_Opening.objects.filter(company=company_id)
+                        context = {'company':company}
+                        return render(request, 'user/account.html', context)
+                    except:
+                        context = {}
+                        HttpResponse('Please complete your profile to view this page.')
+                elif name=="save_comp_profile":
+                    comp_name = request.POST['comp_name']
+                    comp_desc = request.POST['comp_desc']
+                    comp_logo = request.POST['comp_logo']
+                    comp_website = request.POST['comp_website']
+                    Company.objects.filter(user=request.user).update(company_name=comp_name,company_desc=comp_desc,company_logo=comp_logo,company_website=comp_website)
+                    # Company.objects.filter(user=request.user).update(company_desc=comp_desc)
+                    # Company.objects.filter(user=request.user).update(company_logo=comp_logo)
+                    # Company.objects.filter(user=request.user).update(company_website=comp_website)
+                    company = Company.objects.get(user=request.user)
+                    context = {'company':company}
+                    return render(request,"user/founder_profile.html", context)
+
+                elif name=="app_profile":
                     applicant_id = request.POST['applicant_id']
                     
                     applicant = User.objects.get(pk=applicant_id)
@@ -228,7 +252,10 @@ def signup(request):
 
 
 def profile(request):
-    
+    if request.user.is_startup_founder:
+        company = Company.objects.get(user=request.user)
+        context = {'company':company}
+        return render(request,"user/founder_profile.html", context)
     try:
         print("kkkkkkkkkkkkkkkkk")
         applicant = request.user
@@ -244,5 +271,9 @@ def profile(request):
         
         return render(request, "user/profile.html", context)
     except:
+        # context = {}
         return HttpResponse("Something went wrong!!!")
+    
+    
+
 

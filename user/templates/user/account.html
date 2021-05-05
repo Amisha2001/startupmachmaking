@@ -9,17 +9,37 @@
 {% if request.user.is_startup_founder %}
 {% if company %}
 
-  
-  {% comment %} <button action="{% url 'account' %}" method='POST' value="founder_job_opening"> Make new job <button>  {% endcomment %}
-
+<h1 class="my-5">Edit Company Details Form</h1>
+<form action="{% url 'account' %}" method='POST'>
+{% csrf_token %}
+<input type="hidden" name="name" value="save_comp_profile">
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" name="comp_name" value={{company.company_name}} id="floatingInput" placeholder="Company Name" required>
+  <label for="floatingInput">Company Name</label>
+</div>
+<div class="form-floating mb-3">
+  <input type="textarea" class="form-control" name="comp_desc" value={{company.company_desc}} id="floatingInput" placeholder="Company Description" required>
+  <label for="floatingInput">Company Description</label>
+</div>
+<div class="input-group mb-3">
+  <label class="input-group-text" for="inputGroupFile01" >Company Logo</label>
+  <input type="file" class="form-control"  value={{company.company_logo}} id="inputGroupFile01" name="comp_logo" required>
+</div>
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" name="comp_website"  value={{company.company_website}} id="floatingInput" placeholder="Company Website" required>
+  <label for="floatingInput">Company Website</label>
+</div>
+<button class="btn btn-primary" type="submit">Submit</button>
+</form>  
 
 {% else %}
+
 <h1 class="my-5">Company Details Form</h1>
 <form action="{% url 'account' %}" method='POST'>
 {% csrf_token %}
 <input type="hidden" name="name" value="company_detail">
 <div class="form-floating mb-3">
-  <input type="text" class="form-control" name="comp_name" id="floatingInput" placeholder="Company Name" required>
+  <input type="text" class="form-control" name="comp_name" id="floatingInput" placeholder="Company Name"  required>
   <label for="floatingInput">Company Name</label>
 </div>
 <div class="form-floating mb-3">
@@ -36,6 +56,7 @@
 </div>
 <button class="btn btn-primary" type="submit">Submit</button>
 </form>
+
 {% endif %}
 {% else %}
 {% comment %} {% if resume %}

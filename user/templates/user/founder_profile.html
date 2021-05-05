@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}{{applicant.username}} {% endblock title %}
+
+{% block body %}
+
+<div class="container">
+{% comment %} {{applicant}} {% endcomment %}
+
+{% comment %} <img src="{{resume.avatar.url}}" style="display: block; margin-left: auto; margin-right: auto; border-radius: 50%;" width="300px" height="300px" alt="Uh! Oh!"> {% endcomment %}
+<h1 class="text-center my-3">{{user.first_name}} {{user.last_name}}</h1>
+
+<div class="card my-5">
+  <div class="card-body">
+    <h5 class="text-muted"  style="text-align:center;">{{company.company_name}}</h5>
+  <hr>
+  <p>company name: {{company.company_desc}}</p>
+  <p>website: {{company.company_website}}</p>
+  
+  </div>
+    <form action="{% url 'account' %}" method="POST">
+        {% csrf_token %}
+        <input type='hidden' name='name' value='edit_comp_profile'>
+        <input type='hidden' name='company_id' value={{job.company.id}}>
+        <input type='hidden' name='job_id' value={{job.id}}>
+        </div>
+        <button type="submit" class="btn btn-primary">Edit Profile</button>
+    </form>
+
+</div>
+
+</div>
+
+{% endblock body %}
