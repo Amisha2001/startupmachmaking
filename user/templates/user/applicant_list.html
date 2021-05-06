@@ -19,27 +19,32 @@ List of Applicants
         {% csrf_token %}
         <input type="hidden" name="name" value="app_profile"> 
         <input type="hidden" name="applicant_id" value={{row.user.email}}> 
-        <p><button class="profilebutton">View Full Profile</button></p>
+        <p><button class="btn btn-primary" >View Full Profile</button></p>
 
     </form>
+    {% if row.status == "in progress" %}
+    <div class="btn-group">
+        <form action="{% url 'account' %}" method="POST" style="margin-left:1px; margin-top:1rem; ">
+            {% csrf_token %}
+            <input type="hidden" name="name" value="selection">
+            <input type="hidden" value="selected" name="status">
+            <input type="hidden" value={{job_id}} name="job_id">
+            <input type="hidden" name="applicant_id" value={{row.user.email}}> 
+            <button  class="btn btn-primary" >Select</button>
+        </form>
 
-    <form action="{% url 'account' %}" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="name" value="selection">
-        <input type="hidden" value="selected" name="status">
-        <input type="hidden" value={{job_id}} name="job_id">
-        <input type="hidden" name="applicant_id" value={{row.user.email}}> 
-        <button class="btn btn-primary">Select</button>
-    </form>
-
-    <form action="{% url 'account' %}" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="name" value="selection">
-        <input type="hidden" value="rejected" name="status">
-        <input type="hidden" value={{job_id}} name="job_id">
-        <input type="hidden" name="applicant_id" value={{row.user.email}}> 
-        <button class="btn btn-primary">Reject</button>
-    </form>
+        <form action="{% url 'account' %}" method="POST" style="margin-left:2rem; margin-top:1rem; ">
+            {% csrf_token %}
+            <input type="hidden" name="name" value="selection">
+            <input type="hidden" value="rejected" name="status">
+            <input type="hidden" value={{job_id}} name="job_id">
+            <input type="hidden" name="applicant_id" value={{row.user.email}}> 
+            <button class="btn btn-primary"  >Reject</button>
+        </form>
+    </div>
+    {% else %}
+        <h4 class="btn btn-primary"  style="pointer-events: none; background-color:green">{{row.status}}<h4> 
+    {% endif %}
     </div>
     <br>
 {% endfor %}

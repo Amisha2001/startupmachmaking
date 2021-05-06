@@ -102,7 +102,8 @@ def account(request):
                     # app=application.objects.filter(user=User.objects.get(pk=applicant_id),job=Job_Opening.objects.get(pk=job_id))
                     application.objects.filter(user=User.objects.get(pk=applicant_id),job=Job_Opening.objects.get(pk=job_id)).update(status=status)
                     # app.refresh_from_db()
-
+                    app_email=User.objects.get(pk=applicant_id).email
+                    
                     job_op=Job_Opening.objects.get(pk=job_id)
 
                     applicant_list = application.objects.filter(job=Job_Opening.objects.get(pk=job_id))
@@ -111,7 +112,7 @@ def account(request):
                         'Confirmation mail from MatchMaking',
                         "||| {} for the job{} of the company {} |||".format(status,job_op.title,job_op.company.company_name),
                         'startupmatchmaking@gmail.com',
-                        ['arjunarora2324@gmail.com'],
+                        [app_email],
                         fail_silently=False,
                     )
                     return render(request, 'user/applicant_list.html', {'applicant_list':applicant_list,"job_id":job_id})

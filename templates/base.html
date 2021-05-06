@@ -13,7 +13,7 @@
     <style>
       .profilecard {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        max-width: 300px;
+        max-width: 400px;
         margin: auto;
         text-align: center;
         font-family: arial;
@@ -58,10 +58,29 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
        
       </ul>
-      {% comment %} <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form> {% endcomment %}
+      <form class="d-flex">
+        {% comment %} <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button> {% endcomment %}
+        {% if request.user.is_authenticated %}
+          {% comment %} <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a> {% endcomment %}
+          
+          {% if request.user.is_startup_founder %}
+              
+            <a class="dropdown-item" href="/account/found_dash">My Dashboard</a>
+          
+          {% else %}
+            
+            <a class="dropdown-item" href="/dashboard/applicant">My Dashboard</a>
+          
+
+          {% endif %}
+          
+          <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+          <a class="btn btn-primary mx-2" href="{% url 'login' %}" role="button">Login</a>
+          <a class="btn btn-primary" href="{% url 'signup' %}" role="button">Signup</a>
+        {% endif %}
+      </form>
       <div>
                     {% if request.user.is_authenticated %}
                     <ul class="navbar-nav">
@@ -79,26 +98,13 @@
                                 <li>
                                   <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
                                 </li>
-                                  {% if request.user.is_startup_founder %}
-                                   <li>
-                                  <a class="dropdown-item" href="/account/found_dash">My Dashboard</a>
-                                </li>
-                                {% else %}
-                                  <li>
-                                  <a class="dropdown-item" href="/dashboard/applicant">My Dashboard</a>
-                                </li>
-
-                                {% endif %}
-                                <li>
-                                  <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                                </li>
                                 
                             </ul>
                         </li>
                     </ul>
                     {% else %}
-                    <a class="btn btn-primary mx-2" href="{% url 'login' %}" role="button">Login</a>
-                    <a class="btn btn-primary" href="{% url 'signup' %}" role="button">Signup</a>
+                    {% comment %} <a class="btn btn-primary mx-2" href="{% url 'login' %}" role="button">Login</a>
+                    <a class="btn btn-primary" href="{% url 'signup' %}" role="button">Signup</a> {% endcomment %}
                     {% endif %}
                 </div>
     </div>

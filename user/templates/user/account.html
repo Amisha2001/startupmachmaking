@@ -1,5 +1,5 @@
 {% extends 'base.html' %} 
-
+{% load static %}
 {% block title %}Account{% endblock title %} 
 {% block body %}
 
@@ -60,7 +60,7 @@
 {% endif %}
 {% else %}
 {% if resume %}
-<form action="{% url 'account' %}" method='POST'>
+<form action="{% url 'account' %}" method='POST' style="margin-right:2rem; margin-top:2rem;">
   {% csrf_token %}
   <input type="hidden" name="name" value="edited_appl_res">
   <div class="form-floating mb-3">
@@ -88,265 +88,321 @@
 
 
 {% else %}
+{% comment %} <img src="{% static 'images/home1.jpg' %}" class="img-responsive" alt=""> {% endcomment %}
+<div style="background-image:url({% static 'images/joba.jpg' %}) ">
 
-<form action="{% url 'account' %}" method='POST'>
-  {% csrf_token %}
-  <input type="hidden" name="name" value="res_form">
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="bio" id="floatingInput" placeholder="Bio" required>
-    <label for="floatingInput">Bio</label>
-  </div>
-  <div class="form-floating mb-3">
-    <input type="phone" class="form-control" name="ph_no" id="floatingInput" placeholder="Phone Number" required>
-    <label for="floatingInput">Phone Number</label>
-  </div>
-  <div class="input-group mb-3">
-    <label class="input-group-text" for="inputGroupFile01">Avatar</label>
-    <input type="file" class="form-control" id="inputGroupFile01" name="avatar" required>
-  </div>
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="pri_city" id="floatingInput" placeholder="Primary City" required>
-    <label for="floatingInput">Primary City</label>
-  </div>
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="sec_city" id="floatingInput" placeholder="Secondary City" required>
-    <label for="floatingInput">Secondary City</label>
-  </div>
-  <button class="btn btn-primary" type="submit">Submit</button>
-  </form>
+
+<div style="margin-left:15rem; margin-top:4rem;">
+      <table style="margin: auto;
+  width: 50%;
+  padding: 10px;
+  ">
+      <tbody >
+      <tr >
+      <td >
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ResumeModal">
+            Resume</button>
+          
+          <!-- Modal -->
+          <div class="modal fade" id="ResumeModal" tabindex="-1" aria-labelledby="ResumeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="ResumeLabel">Resume</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+            <form action="{% url 'account' %}" method='POST'>
+              {% csrf_token %}
+              <input type="hidden" name="name" value="res_form">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="bio" id="floatingInput" placeholder="Bio" required>
+                <label for="floatingInput">Bio</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="phone" class="form-control" name="ph_no" id="floatingInput" placeholder="Phone Number" required>
+                <label for="floatingInput">Phone Number</label>
+              </div>
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupFile01">Avatar</label>
+                <input type="file" class="form-control" id="inputGroupFile01" name="avatar" required>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="pri_city" id="floatingInput" placeholder="Primary City" required>
+                <label for="floatingInput">Primary City</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="sec_city" id="floatingInput" placeholder="Secondary City" required>
+                <label for="floatingInput">Secondary City</label>
+              </div>
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </form>
   
-  
-  
-  
-  
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EducationModal">
-    Add Education
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="EducationModal" tabindex="-1" aria-labelledby="EducationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="EducationModalLabel">Add Education</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="{% url 'account' %}" method='POST'>
-  {% csrf_token %}
-  <input type="hidden" name="name" value="edu_form">
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="college" id="floatingInput" placeholder="College Name" required>
-    <label for="floatingInput">College Name</label>
-  </div>
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="stream" id="floatingInput" placeholder="Stream" required>
-    <label for="floatingInput">Stream</label>
-  </div>
-  <div>
-  <label for="floatingInputdate">Start Date</label>
-  <input type="date" class="form-control" name="start_year" id="floatingInputdate" placeholder="Stream" required>
-  </div>
-  <div>
-  <label for="floatingInputdate">End Date</label>
-  <input type="date" class="form-control" name="end_year" id="floatingInputdate" placeholder="Stream" required>
-  </div>
-  <div class="form-check form-switch my-2">
-    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="status" checked>
-    <label class="form-check-label" for="flexSwitchCheckChecked">pursuing</label>
-  </div>
-  
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button class="btn btn-primary" type="submit">Save</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#JobModal">
-    Add Job
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="JobModal" tabindex="-1" aria-labelledby="JobModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="JobModalLabel">Add Job</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="{% url 'account' %}"  method='POST'>
-  {% csrf_token %}
-  <input type="hidden" name="name" value="job_form">
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="profile" id="floatingInput" placeholder="Job Profile" required>
-    <label for="floatingInput">Profile</label>
-  </div>
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="organization" id="floatingInput" placeholder="Organization" required>
-    <label for="floatingInput">Organization</label>
-  </div>
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="location" id="floatingInput" placeholder="Location" required>
-    <label for="floatingInput">Location</label>
-  </div>
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="job_desc" id="floatingInput" placeholder="Job Description" required>
-    <label for="floatingInput">Job Description</label>
-  </div>
-  <div>
-  <label for="floatingInputdate">Start Date</label>
-  <input type="date" class="form-control" name="start_year" id="floatingInputdate" placeholder="Stream" required>
-  </div>
-  <div>
-  <label for="floatingInputdate">End Date</label>
-  <input type="date" class="form-control" name="end_year" id="floatingInputdate" placeholder="Stream" required>
-  </div>
-  
-  
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button class="btn btn-primary" type="submit">Save</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Button trigger modal -->
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SkillModal">
-    Add Skill
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="SkillModal" tabindex="-1" aria-labelledby="SkillModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="SkillModalLabel">Add Skill</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="{% url 'account' %}"  method='POST'>
-  {% csrf_token %}
-  <input type="hidden" name="name" value="skill_form">
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="skill_name" id="floatingInput" placeholder="Skill Name" required>
-    <label for="floatingInput">Skill Name</label>
-  </div>
-  <div class="form-floating mb-3">
-              <select class="form-select" id="floatingInput4" required name="skill_level">
-                <option value="Beginer">Beginer</option>
-                <option value="Intermidiate">Intermidiate</option>
-                <option value="Advanced">Advanced</option>
-              </select>
-              <label for="floatingInput4">Subject</label>
+              </div>
+              </div>
             </div>
+          </div>
+</td>
+
   
   
-  
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button class="btn btn-primary" type="submit">Save</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AcompModal">
-    Add Accomplishments
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="AcompModal" tabindex="-1" aria-labelledby="AcompModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="AcompModalLabel">Add Accomplishments</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="{% url 'account' %}"  method='POST'>
-  {% csrf_token %}
-  <input type="hidden" name="name" value="acomp_form">
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="desc" id="floatingInput" placeholder="Description" required>
-    <label for="floatingInput">Description</label>
-  </div>
-  
-  
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button class="btn btn-primary" type="submit">Save</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#PortModal">
-    Add Portfolio
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="PortModal" tabindex="-1" aria-labelledby="PortModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="PortModalLabel">Add Portfolio</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
+          </tr>
+          <!-- Button trigger modal -->
+          <tr>
+          <td>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EducationModal">
+            Add Education
+          </button>
+          
+          <!-- Modal -->
+          <div class="modal fade" id="EducationModal" tabindex="-1" aria-labelledby="EducationModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="EducationModalLabel">Add Education</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="{% url 'account' %}" method='POST'>
+                  {% csrf_token %}
+                  <input type="hidden" name="name" value="edu_form">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="college" id="floatingInput" placeholder="College Name" required>
+                    <label for="floatingInput">College Name</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="stream" id="floatingInput" placeholder="Stream" required>
+                    <label for="floatingInput">Stream</label>
+                  </div>
+                  <div>
+                  <label for="floatingInputdate">Start Date</label>
+                  <input type="date" class="form-control" name="start_year" id="floatingInputdate" placeholder="Stream" required>
+                  </div>
+                  <div>
+                  <label for="floatingInputdate">End Date</label>
+                  <input type="date" class="form-control" name="end_year" id="floatingInputdate" placeholder="Stream" required>
+                  </div>
+                  <div class="form-check form-switch my-2">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="status" checked>
+                    <label class="form-check-label" for="flexSwitchCheckChecked">pursuing</label>
+                  </div>
+          
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button class="btn btn-primary" type="submit">Save</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          </td>
+          </tr>
+          <!-- Button trigger modal -->
+          <tr>
+          <td>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#JobModal">
+            Add Job
+          </button>
+          
+          <!-- Modal -->
+          <div class="modal fade" id="JobModal" tabindex="-1" aria-labelledby="JobModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="JobModalLabel">Add Job</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="{% url 'account' %}"  method='POST'>
+                  {% csrf_token %}
+                  <input type="hidden" name="name" value="job_form">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="profile" id="floatingInput" placeholder="Job Profile" required>
+                    <label for="floatingInput">Profile</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="organization" id="floatingInput" placeholder="Organization" required>
+                    <label for="floatingInput">Organization</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="location" id="floatingInput" placeholder="Location" required>
+                    <label for="floatingInput">Location</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="job_desc" id="floatingInput" placeholder="Job Description" required>
+                    <label for="floatingInput">Job Description</label>
+                  </div>
+                  <div>
+                  <label for="floatingInputdate">Start Date</label>
+                  <input type="date" class="form-control" name="start_year" id="floatingInputdate" placeholder="Stream" required>
+                  </div>
+                  <div>
+                  <label for="floatingInputdate">End Date</label>
+                  <input type="date" class="form-control" name="end_year" id="floatingInputdate" placeholder="Stream" required>
+                </div>
+          
+          
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button class="btn btn-primary" type="submit">Save</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          </td>
+          </tr>
+          <!-- Button trigger modal -->
+          <!-- Button trigger modal -->
+          <tr>
+          <td>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SkillModal">
+            Add Skill
+          </button>
+          
+          <!-- Modal -->
+          <div class="modal fade" id="SkillModal" tabindex="-1" aria-labelledby="SkillModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="SkillModalLabel">Add Skill</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="{% url 'account' %}"  method='POST'>
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="skill_form">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="skill_name" id="floatingInput" placeholder="Skill Name" required>
+                      <label for="floatingInput">Skill Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <select class="form-select" id="floatingInput4" required name="skill_level">
+                        <option value="Beginer">Beginer</option>
+                        <option value="Intermidiate">Intermidiate</option>
+                        <option value="Advanced">Advanced</option>
+                      </select>
+                      <label for="floatingInput4">Subject</label>
+                    </div>
+          
+          
+          
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button class="btn btn-primary" type="submit">Save</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          </td>
+          </tr>
+          <!-- Button trigger modal -->
+          <tr>
+          <td>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AcompModal">
+            Add Accomplishments
+          </button>
+          
+          <!-- Modal -->
+          <div class="modal fade" id="AcompModal" tabindex="-1" aria-labelledby="AcompModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="AcompModalLabel">Add Accomplishments</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="{% url 'account' %}"  method='POST'>
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="acomp_form">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="desc" id="floatingInput" placeholder="Description" required>
+                      <label for="floatingInput">Description</label>
+                    </div>
+          
+          
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button class="btn btn-primary" type="submit">Save</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          </td>
+          </tr>
+          <!-- Button trigger modal -->
+          <tr>
+          <td>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#PortModal">
+            Add Portfolio
+          </button>
+          
+          <!-- Modal -->
+          
+          <div class="modal fade" id="PortModal" tabindex="-1" aria-labelledby="PortModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="PortModalLabel">Add Portfolio</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                 <form action="{% url 'account' %}"  method='POST'>
-  {% csrf_token %}
-  <input type="hidden" name="name" value="port_form">
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="proj_name" id="floatingInput" placeholder="Project Name" required>
-    <label for="floatingInput">Project Name</label>
+                  {% csrf_token %}
+                  <input type="hidden" name="name" value="port_form">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="proj_name" id="floatingInput" placeholder="Project Name" required>
+                    <label for="floatingInput">Project Name</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="link" id="floatingInput" placeholder="Link" required>
+                    <label for="floatingInput">Link</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="proj_desc" id="floatingInput" placeholder="Project Description" required>
+                    <label for="floatingInput">Project Description</label>
+                  </div>
+                  <div>
+                  <label for="floatingInputdate">Start Date</label>
+                  <input type="date" class="form-control" name="start_year" id="floatingInputdate" placeholder="Stream" required>
+                  </div>
+                  <div>
+                  <label for="floatingInputdate">End Date</label>
+                  <input type="date" class="form-control" name="end_year" id="floatingInputdate" placeholder="Stream" required>
+                  </div>
+          
+          
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button class="btn btn-primary" type="submit">Save</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          </td>
+          </tr>
+          </tbody>
+  </table>
   </div>
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="link" id="floatingInput" placeholder="Link" required>
-    <label for="floatingInput">Link</label>
-  </div>
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control" name="proj_desc" id="floatingInput" placeholder="Project Description" required>
-    <label for="floatingInput">Project Description</label>
-  </div>
-  <div>
-  <label for="floatingInputdate">Start Date</label>
-  <input type="date" class="form-control" name="start_year" id="floatingInputdate" placeholder="Stream" required>
-  </div>
-  <div>
-  <label for="floatingInputdate">End Date</label>
-  <input type="date" class="form-control" name="end_year" id="floatingInputdate" placeholder="Stream" required>
-  </div>
-  
-  
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button class="btn btn-primary" type="submit">Save</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <br><br>
+          <br><br>
   <form action="{% url 'account' %}"  method='POST'>
   {% csrf_token %}
     <input type="hidden" name="name" value="dashboard"> 
    <button class="btn btn-primary" type="submit">Click here to go to your Dashboard</button>
 
   </form>
+</div>
 {% comment %} {% endif %} {% endcomment %}
   {% comment %} <div>
   {% for message in messages %}
@@ -358,7 +414,7 @@
 
   {% endif %}
 </div>
-  <div>
+  <div style="text-align:center; margin-top:4rem;"">
   {% for message in messages %}
     <h4>{{message}}</h4>
   {% endfor %}

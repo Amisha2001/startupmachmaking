@@ -33,102 +33,122 @@
 </style>
 
 {% block body %}
+<div style="margin-left:2rem; margin-right:2rem; margin-top:2rem;">
+  <h3>To make a new job click on the button given below</h3>
+  <body>
+  <button style="margin-left:2rem; margin-top:1rem;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#JobModal">
+      Make Job
+    </button>
+    <br><br>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="JobModal" tabindex="-1" aria-labelledby="JobModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="JobModalLabel">Add Job</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{% url 'account' %}" method='POST'>
+            {% csrf_token %}
+            <input type="hidden" name="name" value="founder_job_opening">
+            <div class="form-floating mb-3">
+                  <select id="skill" class="form-control" name="title">
+                    <optgroup label="Web">
+                      <option value="frontend_developer">Front-End Developer</option>
+                      <option value="php_developer">PHP Developer</option>
+                      <option value="python_developer">Python Developer</option>
+                      <option value="rails_developer">Rails Developer</option>
+                      <option value="web_designer">Web Designer</option>
+                      <option value="wordpress_developer">Wordpress Developer</option>
+                    </optgroup>
+                    <optgroup label="Mobile">
+                      <option value="android_developer">Android Developer</option>
+                      <option value="ios_developer">IOS Developer</option>
+                      <option value="mobile_designer">Mobile Designer</option>
+                    </optgroup>
+                    <optgroup label="Business">
+                      <option value="business_owner">Business Owner</option>
+                      <option value="freelancer">Freelancer</option>
+                    </optgroup>
+                  </select>
+                  <label for="floatingInput">Job Title</label>
 
- <h3>To make a new job click on the button given below</h3>
- <body>
- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#JobModal">
-    Make Job
-  </button>
-  <br><br>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="JobModal" tabindex="-1" aria-labelledby="JobModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="JobModalLabel">Add Job</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="{% url 'account' %}" method='POST'>
-          {% csrf_token %}
-          <input type="hidden" name="name" value="founder_job_opening">
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="title" id="floatingInput" placeholder="Job Title" required>
-            <label for="floatingInput">Job Title</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="job_desc" id="floatingInput" placeholder="Job Description" required>
-            <label for="floatingInput">Job Description</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="job_type" id="floatingInput" placeholder="Job Type" required>
-            <label for="floatingInput">Job Type</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="expirence" id="floatingInput" placeholder="Experience" required>
-            <label for="floatingInput">Experience</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="salary" id="floatingInput" placeholder="Salary" required>
-            <label for="floatingInput">Salary</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="textarea" class="form-control" name="about_job" id="floatingInput" placeholder="About Job" required>
-            <label for="floatingInput">About Job</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="skill" id="floatingInput" placeholder="Skill" required>
-            <label for="floatingInput">Skill</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="hidden" class="form-control" name="company_id" id="floatingInput" value={{company_id}}>
-            <label for="floatingInput"></label>
-          </div>
-          <div>
-            <label for="floatingInputdate">Start Date</label>
-            <input type="date" class="form-control" name="start_year" id="floatingInputdate" placeholder="Stream" required>
             </div>
-           <div>
-          <label for="floatingInputdate">Apply By</label>
-          <input type="date" class="form-control" name="end_year" id="floatingInputdate" placeholder="Stream" required>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="job_desc" id="floatingInput" placeholder="Job Description" required>
+              <label for="floatingInput">Job Description</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="job_type" id="floatingInput" placeholder="Job Type" required>
+              <label for="floatingInput">Job Type</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="expirence" id="floatingInput" placeholder="Experience" required>
+              <label for="floatingInput">Experience</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="salary" id="floatingInput" placeholder="Salary" required>
+              <label for="floatingInput">Salary</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="textarea" class="form-control" name="about_job" id="floatingInput" placeholder="About Job" required>
+              <label for="floatingInput">About Job</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="skill" id="floatingInput" placeholder="Skill" required>
+              <label for="floatingInput">Skill</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="hidden" class="form-control" name="company_id" id="floatingInput" value={{company_id}}>
+              <label for="floatingInput"></label>
+            </div>
+            <div>
+              <label for="floatingInputdate">Start Date</label>
+              <input type="date" class="form-control" name="start_year" id="floatingInputdate" placeholder="Stream" required>
+              </div>
+            <div>
+            <label for="floatingInputdate">Apply By</label>
+            <input type="date" class="form-control" name="end_year" id="floatingInputdate" placeholder="Stream" required>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button class="btn btn-primary" type="submit">Save</button>
-          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="submit">Save</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  
-<h3>Jobs Which are already opened</h3>
-<div class="container">
+    
+  <h3>Jobs Which are already opened</h3>
+  <div class="container">
 
-  {% for jobposting in job_opened %}
-  
-  <div class="card my-5">
-    <div class="card-header">
-      {{jobposting.title}}<br>
-      {{jobposting.company}}
-    </div>
-    <div class="card-body">
-      <p class="card-text">Start Date: {{jobposting.statdate}}</p>
-      <p class="card-text">Apply By: {{jobposting.endate}}</p>
-      <p class="card-text">Salary: {{jobposting.salary}}</p>
-    </div>
-    <div class="card-footer">
-      <p class="card-text">{{jobposting.jobtype}}</p>
-    </div>
-     <form action="{% url 'account' %}" method='POST'>
-        {% csrf_token %}
-         <input type="hidden" name="name" value="applied_appl">
-        <input type="hidden" value={{ jobposting.id}} name="job_id">
-        <button type="submit" class="btn btn-primary">Applied Applicants</button>
+    {% for jobposting in job_opened %}
+    
+    <div class="card my-5">
+      <div class="card-header">
+        {{jobposting.title}}<br>
+        {{jobposting.company}}
+      </div>
+      <div class="card-body">
+        <p class="card-text">Start Date: {{jobposting.statdate}}</p>
+        <p class="card-text">Apply By: {{jobposting.endate}}</p>
+        <p class="card-text">Salary: {{jobposting.salary}}</p>
+      </div>
+      <div class="card-footer">
+        <p class="card-text">{{jobposting.jobtype}}</p>
+      </div>
+      <form action="{% url 'account' %}" method='POST'>
+          {% csrf_token %}
+          <input type="hidden" name="name" value="applied_appl">
+          <input type="hidden" value={{ jobposting.id}} name="job_id">
+          <button type="submit" class="btn btn-primary">Applied Applicants</button>
 
-        </form>
-  </div>
-  {% endfor %}
+          </form>
+    </div>
+    {% endfor %}
+</div>
 {% endblock body %}
 

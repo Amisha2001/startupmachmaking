@@ -3,10 +3,10 @@
 {% block title %}Account{% endblock title %} 
 
 {% block body %}
-
+<div style="margin-left:2rem; margin-right:2rem; margin-top:2rem;">
 <h2>Search for a Start up based on your skill set</h2>
-
-<form action="joblist" method="POST">
+<br>
+<form action="joblist" method="POST" style="margin-left:2rem;" >
     {% csrf_token  %}
 
   <label for="job" placeholder="skill" id="myInput">Job Role:</label>
@@ -34,5 +34,28 @@
 <br><br><br>
 
 <h3>Jobs for which you have already applied for</h3>
+<div style="margin-left:2rem;" >
+{% for app in app_applied %}
+
+  <div class="card my-5">
+    <div class="card-header">
+      {{app.job.title}}<br>
+      {{app.job.company}}
+    </div>
+    <div class="card-body">
+      <p class="card-text">Start Date: {{app.job.statdate}}</p>
+      <p class="card-text">Apply By: {{app.job.endate}}</p>
+      <p class="card-text">Salary: {{app.job.salary}}</p>
+    </div>
+    <div class="card-footer">
+      <p class="card-text">{{app.job.jobtype}}</p>
+      <a href="{{app.job.slug}}" class="btn btn-primary">view details</a>
+      
+    </div>
+  </div>
+
+{% endfor %}
+</div>
+</div>
 
 {% endblock body %}

@@ -5,7 +5,8 @@ from django.core.mail import send_mail
 from datetime import date
 
 def applicantdashboard(request):    
-    return render(request,'applicantdashboard.html')
+    app_applied=application.objects.filter(user=request.user)
+    return render(request,'applicantdashboard.html',{'app_applied':app_applied})
 
 def joblist(request):
     tag = request.POST.get('skill')
@@ -46,9 +47,9 @@ def send_email(request):
             'Confirmation mail from MatchMaking',
             "|||{} ||| {} \\\ {} \\\ {} \\\  |||||".format(job_details.jobdesc,job_details.experience,job_details.skills,company_details.company_name),
             'startupmatchmaking@gmail.com',
-            ['arjunarora2324@gmail.com'],
+            [request.user.email],
             fail_silently=False,
         )
-        return HttpResponse("Confirmation email sent by StartUp MatchMaking")
+        return HttpResponse("Confirmation email sent by StartUp MatchMaking!!!")
 
     return HttpResponse("some error occured")
