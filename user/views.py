@@ -37,7 +37,7 @@ def account(request):
                 elif name=="save_comp_profile":
                     comp_name = request.POST['comp_name']
                     comp_desc = request.POST['comp_desc']
-                    comp_logo = request.POST['comp_logo']
+                    comp_logo = request.FILES['comp_logo']
                     comp_website = request.POST['comp_website']
                     Company.objects.filter(user=request.user).update(company_name=comp_name,company_desc=comp_desc,company_logo=comp_logo,company_website=comp_website)
                     # Company.objects.filter(user=request.user).update(company_desc=comp_desc)
@@ -62,7 +62,7 @@ def account(request):
                 elif name=="company_detail":
                     comp_name = request.POST['comp_name']
                     comp_desc = request.POST['comp_desc']
-                    comp_logo = request.POST['comp_logo']
+                    comp_logo = request.FILES['comp_logo']
                     comp_website = request.POST['comp_website']
                     new_company = Company(user=request.user, company_name=comp_name, company_desc=comp_desc, company_logo=comp_logo, company_website=comp_website)
                     new_company.save()
@@ -137,7 +137,7 @@ def account(request):
                     return render(request,'user/account.html',context)
                 elif name=='edited_appl_res':
                     bio = request.POST['bio']
-                    avatar = request.POST['avatar']
+                    avatar = request.FILES['avatar']
                     ph_no = request.POST['ph_no']
                     primary_city = request.POST['pri_city']
                     secondary_city = request.POST['sec_city']
@@ -205,7 +205,7 @@ def account(request):
                 elif name=='res_form':
                     print('entered')
                     bio = request.POST['bio']
-                    avatar = request.POST['avatar']
+                    avatar = request.FILES['avatar']
                     ph_no = request.POST['ph_no']
                     primary_city = request.POST['pri_city']
                     secondary_city = request.POST['sec_city']

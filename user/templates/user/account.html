@@ -10,7 +10,7 @@
 {% if company %}
 
 <h1 class="my-5">Edit Company Details Form</h1>
-<form action="{% url 'account' %}" method='POST'>
+<form action="{% url 'account' %}" method='POST' enctype="multipart/form-data" >
 {% csrf_token %}
 <input type="hidden" name="name" value="save_comp_profile">
 <div class="form-floating mb-3">
@@ -35,7 +35,7 @@
 {% else %}
 
 <h1 class="my-5">Company Details Form</h1>
-<form action="{% url 'account' %}" method='POST'>
+<form action="{% url 'account' %}" method='POST' enctype="multipart/form-data" >
 {% csrf_token %}
 <input type="hidden" name="name" value="company_detail">
 <div class="form-floating mb-3">
@@ -60,7 +60,7 @@
 {% endif %}
 {% else %}
 {% if resume %}
-<form action="{% url 'account' %}" method='POST' style="margin-right:2rem; margin-top:2rem;">
+<form action="{% url 'account' %}" method='POST' style="margin-right:2rem; margin-top:2rem;" enctype="multipart/form-data" >
   {% csrf_token %}
   <input type="hidden" name="name" value="edited_appl_res">
   <div class="form-floating mb-3">
@@ -73,7 +73,7 @@
   </div>
   <div class="input-group mb-3">
     <label class="input-group-text" for="inputGroupFile01">Avatar</label>
-    <input type="file" class="form-control" id="inputGroupFile01" name="avatar" value={{resume.avatar }} required>
+    <input type="file" class="form-control" id="inputGroupFile01" name="avatar" value={{resume.avatar.url }} required>
   </div>
   <div class="form-floating mb-3">
     <input type="text" class="form-control" name="pri_city" value={{resume.primary_city}} id="floatingInput" placeholder="Primary City" required>
@@ -114,7 +114,7 @@
                 <div class="modal-body">
 
 
-            <form action="{% url 'account' %}" method='POST'>
+            <form action="{% url 'account' %}" method='POST' enctype="multipart/form-data" >
               {% csrf_token %}
               <input type="hidden" name="name" value="res_form">
               <div class="form-floating mb-3">

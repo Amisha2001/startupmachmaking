@@ -133,9 +133,14 @@
         {{jobposting.company}}
       </div>
       <div class="card-body">
+      <div style="float: left;">
         <p class="card-text">Start Date: {{jobposting.statdate}}</p>
         <p class="card-text">Apply By: {{jobposting.endate}}</p>
         <p class="card-text">Salary: {{jobposting.salary}}</p>
+      </div>
+      <div style="float: right;">
+        <img src="{{jobposting.company.company_logo.url}}" style="margin-left: auto; margin-right: auto; border-radius: 50%;" width="100px" height="100px" alt="Uh! Oh!">  
+      </div>
       </div>
       <div class="card-footer">
         <p class="card-text">{{jobposting.jobtype}}</p>
