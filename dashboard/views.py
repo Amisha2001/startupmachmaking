@@ -45,7 +45,7 @@ def send_email(request):
         company_details = Company.objects.get(pk=company_id)
         send_mail(
             'Confirmation mail from MatchMaking',
-            "|||{} ||| {} \\\ {} \\\ {} \\\  |||||".format(job_details.jobdesc,job_details.experience,job_details.skills,company_details.company_name),
+            "||| {} \ {} \ {} \ {} |||".format(job_details.jobdesc,job_details.experience,job_details.skills,company_details.company_name),
             'startupmatchmaking@gmail.com',
             [request.user.email],
             fail_silently=False,

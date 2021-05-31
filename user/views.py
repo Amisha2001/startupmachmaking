@@ -57,7 +57,7 @@ def account(request):
                     job = Job.objects.get(user = applicant)
                     skill = Skill.objects.get(user = applicant)
                     portfolio = Portfolio.objects.get(user = applicant)
-                    context = {'applicant':applicant,'resume': resume, 'skill': skill, 'education': education, 'job': job, 'portfolio': portfolio, 'accomplishment': accomplishments}                    
+                    context = {'applicant':applicant,'resume': resume, 'skills': skill, 'educations': education, 'job': job, 'portfolio': portfolio, 'accomplishment': accomplishments}                    
                     return render(request,"user/profile.html",context)
                 elif name=="company_detail":
                     comp_name = request.POST['comp_name']
@@ -148,6 +148,7 @@ def account(request):
                        
                         resume = Resume.objects.get(user=request.user)
                         skill = Skill.objects.get(user=request.user)
+                        print("OOOOOOOOOOOOO",skill)
                         education = Education.objects.get(user=request.user)
                         job = Job.objects.get(user=request.user)
                         portfolio = Portfolio.objects.get(user=request.user)
@@ -289,6 +290,8 @@ def profile(request):
         print("kkkkkkkkkkkkkkkkk00000")
         resume = Resume.objects.get(user=request.user)
         skill = Skill.objects.get(user=request.user)
+        print("OOOOOOOOOOOOO",skill)
+
         education = Education.objects.get(user=request.user)
         job = Job.objects.get(user=request.user)
         portfolio = Portfolio.objects.get(user=request.user)

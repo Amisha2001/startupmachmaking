@@ -21,12 +21,13 @@
   <h5>Education</h5>
   <pre>College: {{educations.college}}</pre>
   <p>stream: {{educations.stream}}</p>
-  {% comment %} <p>status: {{educations.status}}</p> {% endcomment %}
+
   {% if educations.status %}
   <p>Status: Pursuing</p>
   {% else %}
   <p>Status: Completed</p>
   {% endif %}
+  
   <hr>
   <h5>Skills</h5>
   <p>{{skills.skill_name}}</p>
