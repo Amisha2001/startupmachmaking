@@ -4,47 +4,54 @@
 {% block body %}
 
 <div class="container">
-{% comment %} {{applicant}} {% endcomment %}
+  {{applicant}}
 
-<img src="{{resume.avatar.url}}" style="display: block; margin-left: auto; margin-right: auto; border-radius: 50%;" width="300px" height="300px" alt="Uh! Oh!">
-<h1 class="text-center my-3">{{applicant.first_name}} {{applicant.last_name}}</h1>
+  <img src="{{resume.avatar.url}}" style="display: block; margin-left: auto; margin-right: auto; border-radius: 50%;"
+    width="300px" height="300px" alt="Uh! Oh!">
+  <h1 class="text-center my-3">{{applicant.first_name}} {{applicant.last_name}}</h1>
 
-<div class="card my-5">
-  <div class="card-body">
-    <h5 class="text-muted"  style="text-align:center;">{{resume.desc}}</h5>
-  <hr>
-  <h5>Personal details</h5>
-  <p>Phone_no: {{resume.phn_no}}</p>
-  <p>Primary City: {{resume.primary_city}}</p>
-  <p>Secondary City: {{resume.secondary_city}}</p>
-  <hr>
-  <h5>Education</h5>
-  <pre>College: {{educations.college}}</pre>
-  <p>stream: {{educations.stream}}</p>
+  <div class="card my-5">
+    <div class="card-body">
+      <h5 class="text-muted" style="text-align:center;">{{resume.desc}}</h5>
+      <hr>
+      <h5>Personal details</h5>
+      <p>Phone_no: {{resume.phn_no}}</p>
+      <p>Primary City: {{resume.primary_city}}</p>
+      <p>Secondary City: {{resume.secondary_city}}</p>
+      <hr>
+      <h5>Education</h5>
 
-  {% if educations.status %}
-  <p>Status: Pursuing</p>
-  {% else %}
-  <p>Status: Completed</p>
-  {% endif %}
-  
-  <hr>
-  <h5>Skills</h5>
-  <p>{{skills.skill_name}}</p>
-  <p>Level: {{skills.skill_level}}</p>
-  </div>
-  {% if request.user.is_startup_founder %}
-  {% else %}      
+      {% for education in educations %}
+      <pre>College: {{education.college}}</pre>
+      <p>stream: {{education.stream}}</p>
+
+      {% if educations.status %}
+      <p>Status: Pursuing</p>
+      {% else %}
+      <p>Status: Completed</p>
+      {% endif %}
+      {% endfor %}
+
+      <hr>
+      <h5>Skills</h5>
+      {% for skill in skills %}
+      <p>Skill: {{ skill.skill_name }}, Level: {{skill.skill_level}}</p>
+      {% endfor %}
+      <!-- <p>{{skills.skill_name}}</p>
+      <p>Level: {{skills.skill_level}}</p> -->
+    </div>
+    {% if request.user.is_startup_founder %}
+    {% else %}
     <div class="card-footer d-flex justify-content-center align-items-center">
       <form action="{% url 'account' %}" method="POST">
         {% csrf_token %}
         <input type='hidden' name='name' value="edit_appl_resume">
         <input type='hidden' name='company_id' value={{job.company.id}}>
         <input type='hidden' name='job_id' value={{job.id}}>
-        </div>
-        <button type="submit" class="btn btn-primary">Edit Resume</button>
-      </form>
     </div>
+    <button type="submit" class="btn btn-primary">Edit Resume</button>
+    </form>
+  </div>
   {% endif %}
 </div>
 
